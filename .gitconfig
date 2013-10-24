@@ -1,0 +1,15 @@
+[color]
+	ui = auto
+[alias]
+	st = status -sb
+	lg = log --oneline --graph --decorate
+	co = checkout
+	ci = commit -a
+	df = diff --word-diff=color
+[user]
+	email = mail@lucaswerkmeister.de
+	name = Lucas Werkmeister
+[push]
+	default = simple
+[core]
+	editor = vim
