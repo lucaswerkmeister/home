@@ -1,0 +1,22 @@
+#!/bin/bash -i
+REPLY=;
+backupFile=/tmp/fortunes_history_backup;
+tmpFile=/tmp/fortunes_history;
+echo -n > $tmpFile; # clear the temporary history file
+history -w $backupFile; # save history ...
+history -c; # and clear it.
+
+while [ ! \( "$REPLY" = "q" -o "$REPLY" = "quit" -o "$REPLY" = "exit" \) ];
+do
+    clear;
+    if [ -n "$REPLY" ]; then
+	echo $REPLY >> $tmpFile;
+	history -r $tmpFile
+	# history -s $REPLY does not work!
+    fi
+    (fortune -c $REPLY) || (clear; fortune -c;)  # try to use the command as fortune file; 
+                                                  # if that file can't be found, use a random one
+    echo; # write a newline
+    read -e;
+done
+history -r $backupFile; # restore history
