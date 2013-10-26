@@ -21,4 +21,12 @@ if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
 fi
 
-~/bin/fbterm-tmux-bash
+if [[ -z "$TMUX" ]]; then
+    SESSION="$(whoami)-$(basename $(tty))";
+    # Start tmux server if it isn't already running
+    echo "Starting tmux server..."
+    /usr/bin/tmux start-server 2> /dev/null;
+    echo "tmux server started."
+    echo "Running fbterm..."
+    fbterm -- /bin/sh ~/bin/fbterm-tmux-bash $SESSION;
+fi
