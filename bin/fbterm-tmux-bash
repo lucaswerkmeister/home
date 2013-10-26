@@ -8,14 +8,13 @@ if [[ -z "$TMUX" ]]; then
     # Create the session if it doesn't exist
     echo "Checking for tty session..."
     if /usr/bin/tmux has-session -t "$SESSION" 2> /dev/null; then
-	echo "tty session already present, will spawn new window later."
+        echo "tty session already present, spawn new window..."
+        /usr/bin/fbterm -- /usr/bin/tmux new-session -t "$SESSION" \; new-window /bin/bash;
     else
-	echo "Creating tty session..."
-	/usr/bin/tmux new-session -d -s "$SESSION" -n "$SESSION-dummywindow" /bin/bash
-	echo "tty session created."
+        echo "Creating tty session..."
+        /usr/bin/fbterm -- /bin/sh -c \
+            "/usr/bin/tmux has-session -t $SESSION 2> /dev/null && \
+                 /usr/bin/tmux new-session -t $SESSION \; new-window /bin/bash || \
+                 /usr/bin/tmux new-session -s $SESSION /bin/bash"
     fi
-    # Create a new session that shares the windows of the existing (or new) session
-    echo "Starting fbterm and tmux..."
-    ( sleep 1; /usr/bin/tmux kill-window -t "$SESSION-dummywindow" ) &
-    /usr/bin/fbterm -- /usr/bin/tmux new-session -t "$SESSION" \; new-window /bin/bash;
 fi
