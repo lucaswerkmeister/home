@@ -12,4 +12,4 @@ alias quit=exit
 alias xclip='xclip -selection c'
 alias grabssh='source ~/bin/grabssh.sh'
 alias batlife='echo `upower --show-info /org/freedesktop/UPower/devices/battery_BAT0 | grep --color=no "time to \(full\|empty\)"` "	(more info with upower --dump)"'
-
+alias cal='cal --monday'
