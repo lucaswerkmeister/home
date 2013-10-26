@@ -27,6 +27,12 @@ if [[ -z "$TMUX" ]]; then
     echo "Starting tmux server..."
     /usr/bin/tmux start-server 2> /dev/null;
     echo "tmux server started."
+    echo "Preparing session counter..."
+    if [[ ! -e "/tmp/.tmux-names/$SESSION" ]]; then 
+        mkdir -p /tmp/.tmux-names;
+    fi
+    echo 1 > "/tmp/.tmux-names/$SESSION";
+    echo "Session counter prepared."
     echo "Running fbterm..."
     fbterm -- /bin/sh ~/bin/fbterm-tmux-bash $SESSION;
 fi

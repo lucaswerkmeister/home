@@ -1,10 +1,12 @@
 #!/bin/sh
 # arguments: $1 - session name
 
-if /usr/bin/tmux has-session -t $1 2> /dev/null; then
+n=$(cat "/tmp/.tmux-names/$1");
+echo "$(($n+1))" > "/tmp/.tmux-names/$1";
+if /usr/bin/tmux has-session -t "$1" 2> /dev/null; then
     echo "tty session present, attach and create new window"
-    /usr/bin/tmux new-session -t $1 \; new-window /bin/bash;
+    /usr/bin/tmux new-session -t "$1" -s "$1-$n" \; new-window /bin/bash;
 else
     echo "tty session not present, create"
-    /usr/bin/tmux new-session -s $1 /bin/bash;
+    /usr/bin/tmux new-session -s "$1" /bin/bash;
 fi
