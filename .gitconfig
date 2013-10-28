@@ -6,6 +6,7 @@
 	co = checkout
 	ci = commit -a
 	df = diff --word-diff=color
+	ls = ls-files
 [user]
 	email = mail@lucaswerkmeister.de
 	name = Lucas Werkmeister
