@@ -8,6 +8,10 @@
 # for ssh logins, install and configure the libpam-umask package.
 #umask 022
 
+# start keychain - before sourcing .bashrc
+keychain #id_rsa
+# the created files will be sourced in .bashrc
+
 # if running bash
 if [ -n "$BASH_VERSION" ]; then
     # include .bashrc if it exists

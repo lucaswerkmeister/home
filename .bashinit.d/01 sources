@@ -1,0 +1,17 @@
+#!/bin/sh
+# At the moment already sourced in /etc/bash_completion.d, but the
+# file comment seems to indicate that this will change in the future,
+# and is only kept currently to ease transitions
+if [[ -f /usr/lib/git-core/git-sh-prompt ]]; then
+    source /usr/lib/git-core/git-sh-prompt
+fi
+
+if [[ -f /etc/profile.d/bash-completion.sh ]]; then
+    source /etc/profile.d/bash-completion.sh
+fi
+
+# source keychain's files
+if [[ -f ~/.keychain/$HOSTNAME-sh ]]; then
+    source ~/.keychain/$HOSTNAME-sh
+fi
+
