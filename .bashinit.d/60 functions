@@ -9,3 +9,8 @@ w() {
     local IFS='+';
     links "https://de.wikipedia.org/w/index.php?title=Spezial:Suche&search=$*";
 }
+
+l() {
+    local IFS='+';
+    links "http://dict.leo.org/ende/?lang=de&search=$*";
+}
