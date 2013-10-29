@@ -1,0 +1,11 @@
+# web search shortcuts
+
+g() {
+    local IFS='+';
+    links "https://google.com/search?q=$*";
+}
+
+w() {
+    local IFS='+';
+    links "https://de.wikipedia.org/w/index.php?title=Spezial:Suche&search=$*";
+}
