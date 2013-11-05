@@ -2,7 +2,7 @@
 	ui = auto
 [alias]
 	st = status -sb
-	lg = log --oneline --graph --decorate
+	lg = log --oneline --graph --decorate --all
 	co = checkout
 	ci = commit -a
 	df = diff --word-diff=color
