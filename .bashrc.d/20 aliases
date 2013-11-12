@@ -1,5 +1,5 @@
 #!/bin/bash
-currentDirectory=$HOME/.bashinit.d/
+currentDirectory=$HOME/.bashrc.d/
 fortunesScriptFile=`find "$currentDirectory" -regex '.*fortune.*[^~]'`
 fortunesScript=`cat "$fortunesScriptFile"`
 alias fortunes=$fortunesScript
