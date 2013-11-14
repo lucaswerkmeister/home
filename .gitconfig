@@ -15,6 +15,7 @@
 	default = simple
 [core]
 	editor = vim
+	autocrlf = input
 [status]
 	branch = true
 	short = true
