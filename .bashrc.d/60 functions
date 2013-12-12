@@ -2,15 +2,25 @@
 
 g() {
     local IFS='+';
-    links "https://google.com/search?q=$*";
+    __links "https://google.com/search?q=$*";
 }
 
 w() {
     local IFS='+';
-    links "https://de.wikipedia.org/w/index.php?title=Spezial:Suche&search=$*";
+    __links "https://de.wikipedia.org/w/index.php?title=Spezial:Suche&search=$*";
 }
 
 l() {
     local IFS='+';
-    links "http://dict.leo.org/ende/?lang=de&search=$*";
+    __links "http://dict.leo.org/ende/?lang=de&search=$*";
+}
+
+__links() {
+    local LINKS_OPTIONS="";
+    if [[ -z "$TMUX" ]]; then
+        # we’re in a TTY
+        LINKS_OPTIONS="$LINKS_OPTIONS -driver fb"
+    fi
+    local cmd="links $LINKS_OPTIONS \"$1\""
+    eval "$cmd"
 }
