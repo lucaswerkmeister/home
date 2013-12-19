@@ -15,3 +15,4 @@ alias batlife='echo `upower --show-info /org/freedesktop/UPower/devices/battery_
 alias cal='cal --monday'
 alias emacs='emacs -nw'
 alias wlan='wpa_cli status'
+alias essen='__links http://www.studentenwerk-karlsruhe.de/de/mobile/canteen/?mensa=1'
