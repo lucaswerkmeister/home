@@ -8,6 +8,7 @@
 	df = diff --word-diff=color
 	ls = ls-files
 	ca = commit -a
+	dc = diff --word-diff=color --cached
 [user]
 	email = mail@lucaswerkmeister.de
 	name = Lucas Werkmeister
@@ -22,3 +23,13 @@
 	short = true
 [fetch]
 	prune = true
+[merge]
+	conflictstyle = diff3
+[rerere]
+	enabled = true
+[rebase]
+	autosquash = true
+[help]
+	autocorrect = 10
+[pull]
+	rebase = true
