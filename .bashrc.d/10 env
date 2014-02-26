@@ -1,2 +1,2 @@
 export EDITOR=vim
-
+[[ ! -z $TMUX ]] && export TERM=screen-256color
