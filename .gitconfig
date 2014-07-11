@@ -9,6 +9,7 @@
 	ls = ls-files
 	ca = commit -a
 	dc = diff --word-diff=color --cached
+	dic = diff --cached
 [user]
 	email = mail@lucaswerkmeister.de
 	name = Lucas Werkmeister
