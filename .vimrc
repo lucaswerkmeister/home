@@ -18,3 +18,9 @@ Plugin 'tpope/vim-repeat'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
+
+" END Vundle part
+
+:set incsearch  " highlight results while search expression is typed
+:set ignorecase
+:set smartcase  " search is case-sensitive iff expression has uppercase chars
