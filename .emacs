@@ -13,5 +13,6 @@
 (show-paren-mode 1)
 '
 (add-to-list 'auto-mode-alist '("\\.nodes\\'" . antlr-mode))
+(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
 
 (if (file-exists-p "~/.emacs_local") (load "~/.emacs_local"))
