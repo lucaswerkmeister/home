@@ -25,4 +25,6 @@ if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
 fi
 
-. ~/bin/fbterm-tmux-bash-1
+if tty | grep -q '/dev/tty*'; then
+    . ~/bin/fbterm-tmux-bash-1
+fi
