@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# Part 1: Set up server, start fbterm
+
+if [[ -z "$TMUX" ]]; then
+    SESSION="$(whoami)-$(basename $(tty))";
+    # Start tmux server if it isn't already running
+    echo "Starting tmux server..."
+    /usr/bin/tmux start-server 2> /dev/null;
+    echo "tmux server started."
+    echo "Preparing session counter..."
+    if [[ ! -d "/tmp/.tmux-names" ]]; then 
+        mkdir -p /tmp/.tmux-names;
+    fi
+    if [[ ! -f "/tmp/.tmux-names/$SESSION" ]]; then
+        echo 1 > "/tmp/.tmux-names/$SESSION";
+    fi
+    echo "Session counter prepared."
+    echo "Running fbterm..."
+    fbterm -- /bin/sh ~/bin/fbterm-tmux-bash-2 $SESSION;
+fi

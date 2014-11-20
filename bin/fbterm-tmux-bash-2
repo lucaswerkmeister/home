@@ -1,6 +1,8 @@
 #!/bin/sh
 # arguments: $1 - session name
 
+# Part 2: Within fbterm, start or reattach tmux
+
 n=$(cat "/tmp/.tmux-names/$1");
 echo "$(($n+1))" > "/tmp/.tmux-names/$1";
 if /usr/bin/tmux has-session -t "$1" 2> /dev/null; then
