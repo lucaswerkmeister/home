@@ -11,7 +11,7 @@
       "\C-[xcompile\C-m\C-m")
 (global-set-key [f12] 'compile-instant)
 (show-paren-mode 1)
-'
+
 (add-to-list 'auto-mode-alist '("\\.nodes\\'" . antlr-mode))
 (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
 
