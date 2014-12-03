@@ -17,7 +17,10 @@ l() {
 
 __links() {
     local LINKS_OPTIONS="";
-    if [[ -z "$TMUX" ]]; then
+    if [[ -v DISPLAY ]]; then
+        # we’re in an X server
+        LINKS_OPTIONS="$LINKS_OPTIONS -driver X"
+    elif [[ ! -v TMUX ]]; then
         # we’re in a TTY
         LINKS_OPTIONS="$LINKS_OPTIONS -driver fb"
     fi
