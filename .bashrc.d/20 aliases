@@ -6,7 +6,7 @@ alias fortunes=$fortunesScript
 
 alias please='sudo $(history -p !-1)'
 alias apt-upgrade='sudo apt-get update && sudo apt-get upgrade'
-alias ll='ls -als'
+alias ll='ls -Alsh'
 alias cd..='cd ..'
 alias quit=exit
 alias xclip='xclip -selection c -display :0'
