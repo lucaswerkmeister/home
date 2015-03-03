@@ -27,3 +27,11 @@ __links() {
     local cmd="links $LINKS_OPTIONS \"$1\""
     eval "$cmd"
 }
+
+# watch WLAN
+
+ww() {
+    tmux set-window-option monitor-content AUTHENTICATED > /dev/null
+    watch wpa_cli status
+    tmux set-window-option monitor-content 2> /dev/null
+}
