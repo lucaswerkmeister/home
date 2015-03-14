@@ -13,6 +13,8 @@ fi
 # source keychain's files
 if [[ -f ~/.keychain/$HOSTNAME-sh ]]; then
     source ~/.keychain/$HOSTNAME-sh
+fi
+if [[ -f ~/.keychain/$HOSTNAME-sh-gpg ]]; then
     source ~/.keychain/$HOSTNAME-sh-gpg
 fi
 
