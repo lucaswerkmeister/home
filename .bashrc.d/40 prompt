@@ -11,4 +11,11 @@ TPUT_RESET="$(tput sgr0)"
 TPUT_BOLD="$(tput bold)"
 TPUT_GREEN="$(tput setaf 2)"
 TPUT_BLUE="$(tput setaf 4)"
-export PROMPT_COMMAND='__git_ps1 "\[$TPUT_RESET$TPUT_BOLD$TPUT_GREEN\]\u@\h \[$TPUT_BLUE\]\w\[$TPUT_RESET\]" " \[$TPUT_BOLD$TPUT_GREEN\]\$\[$TPUT_RESET\] "'
+
+if [[ $HOSTNAME = lucaswerkmeister.de ]]; then
+    # server has older bash whose __git_ps1 doesn't support two-argument form
+    # it also doesn't supporte GIT_PS1_SHOWCOLORHINTS :(
+    export PS1="\[$TPUT_RESET$TPUT_BOLD$TPUT_GREEN\]\u@\h \[$TPUT_BLUE\]\w\[$TPUT_RESET\]\$(__git_ps1 ' (%s)') \[$TPUT_BOLD$TPUT_GREEN\]\$\[$TPUT_RESET\] "
+else
+    export PROMPT_COMMAND='__git_ps1 "\[$TPUT_RESET$TPUT_BOLD$TPUT_GREEN\]\u@\h \[$TPUT_BLUE\]\w\[$TPUT_RESET\]" " \[$TPUT_BOLD$TPUT_GREEN\]\$\[$TPUT_RESET\] "'
+fi
