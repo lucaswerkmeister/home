@@ -16,15 +16,18 @@ l() {
 }
 
 __links() {
-    local LINKS_OPTIONS="";
+    local BROWSER="";
     if [[ -v DISPLAY ]]; then
         # we’re in an X server
-        LINKS_OPTIONS="$LINKS_OPTIONS -driver X"
+        BROWSER="links -driver X"
     elif [[ ! -v TMUX ]]; then
         # we’re in a TTY
-        LINKS_OPTIONS="$LINKS_OPTIONS -driver fb"
+        BROWSER="links -driver fb"
+    else
+        # we’re in a regular terminal
+        BROWSER="SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt lynx"
     fi
-    local cmd="links $LINKS_OPTIONS \"$1\""
+    local cmd="$BROWSER \"$1\""
     eval "$cmd"
 }
 
