@@ -5,6 +5,10 @@
 if [[ -f /usr/lib/git-core/git-sh-prompt ]]; then
     source /usr/lib/git-core/git-sh-prompt
 fi
+# In a different location on Arch linux
+if [[ -f /usr/share/git/completion/git-prompt.sh ]]; then
+    source /usr/share/git/completion/git-prompt.sh
+fi
 
 if [[ -f /etc/profile.d/bash-completion.sh ]]; then
     source /etc/profile.d/bash-completion.sh
