@@ -16,6 +16,6 @@ alias batlife='echo $(bc <<< "scale = 2; 100 * $(</sys/class/power_supply/BAT0/c
 alias cal='cal --monday'
 alias emacs='emacs -nw'
 alias wlan='wpa_cli status'
-alias essen='__links http://www.studentenwerk-karlsruhe.de/de/mobile/canteen/?mensa=1'
+alias essen='__links https://www.studentenwerk-karlsruhe.de/de/mobile/canteen/?mensa=1'
 alias sus='batlife; time sudo pm-suspend; batlife;'
 alias ssh-add='ssh-add -t 1d'
