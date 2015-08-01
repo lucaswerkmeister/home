@@ -15,7 +15,7 @@ alias cal='cal --monday'
 alias emacs='emacs -nw'
 alias wlan='wpa_cli status'
 alias essen='__links https://www.studentenwerk-karlsruhe.de/de/mobile/canteen/?mensa=1'
-alias sus='batlife; time sudo pm-suspend; batlife;'
+alias sus='batlife; time sudo systemctl suspend; batlife;'
 alias ssh-add='ssh-add -t 1d'
 
 alias grep='grep --color=auto'
