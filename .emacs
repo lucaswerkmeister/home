@@ -6,7 +6,8 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(haskell-mode-hook (quote (turn-on-haskell-indent)))
- '(inhibit-startup-screen t))
+ '(inhibit-startup-screen t)
+ '(safe-local-variable-values (quote ((TeX-master . "thesis")))))
 (fset 'compile-instant
       "\C-[xcompile\C-m\C-m")
 (global-set-key [f12] 'compile-instant)
