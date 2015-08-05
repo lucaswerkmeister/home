@@ -18,5 +18,5 @@ alias essen='__links https://www.studentenwerk-karlsruhe.de/de/mobile/canteen/?m
 alias sus='batlife; time sudo systemctl suspend; batlife;'
 alias ssh-add='ssh-add -t 1d'
 
-alias grep='grep --color=auto'
+alias grep='grep --color=auto --binary-files=without-match'
 alias ls='ls --color=auto'
