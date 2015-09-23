@@ -10,6 +10,7 @@
 	ca = commit -a
 	dc = diff --word-diff=color --cached
 	dic = diff --cached
+	conflicts = diff --name-only --diff-filter=U
 [user]
 	email = mail@lucaswerkmeister.de
 	name = Lucas Werkmeister
