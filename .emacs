@@ -23,4 +23,6 @@
 (add-to-list 'auto-mode-alist '("\\.nodes\\'" . antlr-mode))
 (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
 
+(add-to-list 'auto-mode-alist '("PKGBUILD" . shell-script-mode))
+
 (if (file-exists-p "~/.emacs_local") (load "~/.emacs_local"))
