@@ -35,3 +35,18 @@
 	autocorrect = 10
 [pull]
 	rebase = true
+[url "https://github.com/"]
+    insteadOf = "gh:"
+[url "https://github.com/lucaswerkmeister/"]
+    insteadOf = "ghlw:"
+[url "https://github.com/ceylon/"]
+    insteadOf = "ghc:"
+[url "git@github.com:"]
+    pushInsteadOf = "gh:"
+    pushInsteadOf = "https://github.com/"
+[url "git@github.com:lucaswerkmeister/"]
+    pushInsteadOf = "ghlw:"
+    pushInsteadOf = "https://github.com/lucaswerkmeister/"
+[url "git@github.com:ceylon/"]
+    pushInsteadOf = "ghc:"
+    pushInsteadOf = "https://github.com/ceylon/"
