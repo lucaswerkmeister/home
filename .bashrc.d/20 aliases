@@ -17,7 +17,6 @@ alias info='emacs -f info-standalone'
 alias wlan='wpa_cli status'
 alias essen='__links https://www.studentenwerk-karlsruhe.de/de/mobile/canteen/?mensa=1'
 alias sus='batlife; time sudo systemctl suspend; batlife;'
-alias ssh-add='ssh-add -t 1d ~/.ssh/*_rsa'
 
 alias grep='grep --color=auto --binary-files=without-match'
 alias ls='ls --color=auto'
