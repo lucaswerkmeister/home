@@ -2,32 +2,32 @@
 
 g() {
     local IFS='+';
-    __links "https://google.com/search?q=$*";
+    browser "https://google.com/search?q=$*";
 }
 
 w() {
     local IFS='+';
-    __links "https://de.wikipedia.org/w/index.php?title=Spezial:Suche&search=$*";
+    browser "https://de.wikipedia.org/w/index.php?title=Spezial:Suche&search=$*";
 }
 
 l() {
     local IFS='+';
-    __links "http://dict.leo.org/ende/?lang=de&search=$*";
+    browser "http://dict.leo.org/ende/?lang=de&search=$*";
 }
 
-__links() {
-    local BROWSER="";
+browser() {
+    local browser="";
     if [[ -v DISPLAY ]]; then
         # we’re in an X server
-        BROWSER="links -driver X"
+        browser="links -driver X"
     elif [[ ! -v TMUX ]]; then
         # we’re in a TTY
-        BROWSER="links -driver fb"
+        browser="links -driver fb"
     else
         # we’re in a regular terminal
-        BROWSER="SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt lynx -cookies"
+        browser="SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt lynx -cookies"
     fi
-    local cmd="$BROWSER \"$1\""
+    local cmd="$browser \"$1\""
     eval "$cmd"
 }
 
