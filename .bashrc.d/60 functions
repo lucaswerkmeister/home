@@ -5,6 +5,11 @@ g() {
     browser "https://google.com/search?q=$*";
 }
 
+d() {
+    local IFS='+';
+    browser "https://duckduckgo.com/?q=$*";
+}
+
 w() {
     local IFS='+';
     browser "https://de.wikipedia.org/w/index.php?title=Spezial:Suche&search=$*";
