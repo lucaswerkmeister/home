@@ -35,6 +35,19 @@
 	autocorrect = 10
 [pull]
 	rebase = true
+
+# shortcut remote "protocols":
+# 
+# - gh:    github, public
+# - gh_:   github, private
+# - ghlw:  github/lucaswerkmeister, public
+# - ghlw_: github/lucaswerkmeister, private
+# - ghc:   github/ceylon, public
+# - ghc_:  github/ceylon, private
+# 
+# public: pull over HTTPS, push over SSH;
+# private: pull and push over SSH
+
 [url "https://github.com/"]
     insteadOf = "gh:"
 [url "https://github.com/lucaswerkmeister/"]
@@ -42,11 +55,17 @@
 [url "https://github.com/ceylon/"]
     insteadOf = "ghc:"
 [url "git@github.com:"]
+    insteadOf = "gh_:"
     pushInsteadOf = "gh:"
     pushInsteadOf = "https://github.com/"
+    pushInsteadOf = "gh_:"
 [url "git@github.com:lucaswerkmeister/"]
+    insteadOf = "ghlw_:"
     pushInsteadOf = "ghlw:"
     pushInsteadOf = "https://github.com/lucaswerkmeister/"
+    pushInsteadOf = "ghlw_:"
 [url "git@github.com:ceylon/"]
+    insteadOf = "ghc_:"
     pushInsteadOf = "ghc:"
     pushInsteadOf = "https://github.com/ceylon/"
+    pushInsteadOf = "ghc_:"
