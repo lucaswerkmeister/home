@@ -22,6 +22,7 @@
 
 (add-to-list 'auto-mode-alist '("\\.nodes\\'" . antlr-mode))
 (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-mode))
 
 (add-to-list 'auto-mode-alist '("PKGBUILD" . shell-script-mode))
 
