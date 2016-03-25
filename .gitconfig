@@ -47,6 +47,8 @@
 # 
 # public: pull over HTTPS, push over SSH;
 # private: pull and push over SSH
+# 
+# (host `github` is set up in SSH config)
 
 [url "https://github.com/"]
     insteadOf = "gh:"
@@ -54,17 +56,17 @@
     insteadOf = "ghlw:"
 [url "https://github.com/ceylon/"]
     insteadOf = "ghc:"
-[url "git@github.com:"]
+[url "github:"]
     insteadOf = "gh_:"
     pushInsteadOf = "gh:"
     pushInsteadOf = "https://github.com/"
     pushInsteadOf = "gh_:"
-[url "git@github.com:lucaswerkmeister/"]
+[url "github:lucaswerkmeister/"]
     insteadOf = "ghlw_:"
     pushInsteadOf = "ghlw:"
     pushInsteadOf = "https://github.com/lucaswerkmeister/"
     pushInsteadOf = "ghlw_:"
-[url "git@github.com:ceylon/"]
+[url "github:ceylon/"]
     insteadOf = "ghc_:"
     pushInsteadOf = "ghc:"
     pushInsteadOf = "https://github.com/ceylon/"
