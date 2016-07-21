@@ -44,11 +44,13 @@
 # - ghlw_: github/lucaswerkmeister, private
 # - ghc:   github/ceylon, public
 # - ghc_:  github/ceylon, private
+# - gist:  gist, public
+# - gist_: gist, private
 # 
 # public: pull over HTTPS, push over SSH;
 # private: pull and push over SSH
 # 
-# (host `github` is set up in SSH config)
+# (hosts `github`, `github-gist` are set up in SSH config)
 
 [url "https://github.com/"]
     insteadOf = "gh:"
@@ -56,6 +58,8 @@
     insteadOf = "ghlw:"
 [url "https://github.com/ceylon/"]
     insteadOf = "ghc:"
+[url "https://gist.github.com/"]
+    insteadOf = "gist:"
 [url "github:"]
     insteadOf = "gh_:"
     pushInsteadOf = "gh:"
@@ -71,3 +75,7 @@
     pushInsteadOf = "ghc:"
     pushInsteadOf = "https://github.com/ceylon/"
     pushInsteadOf = "ghc_:"
+[url "github-gist:"]
+    insteadOf = "gist_:"
+    pushInsteadOf = "gist:"
+    pushInsteadOf = "gist_:"
