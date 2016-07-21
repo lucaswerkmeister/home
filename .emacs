@@ -42,4 +42,7 @@
   (local-unset-key "\""))
 (add-hook 'LaTeX-mode-hook 'unset-quote-hook)
 
+(setq c-default-style "linux"
+      c-basic-offset 2)
+
 (if (file-exists-p "~/.emacs_local") (load "~/.emacs_local"))
