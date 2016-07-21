@@ -45,4 +45,6 @@
 (setq c-default-style "linux"
       c-basic-offset 2)
 
+(add-hook 'java-mode-hook (lambda() (setq c-basic-offset 4)))
+
 (if (file-exists-p "~/.emacs_local") (load "~/.emacs_local"))
