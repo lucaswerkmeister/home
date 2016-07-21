@@ -1,3 +1,5 @@
+(require 'package)
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -5,6 +7,10 @@
  ;; If there is more than one, they won't work right.
  '(haskell-mode-hook (quote (turn-on-haskell-indent)))
  '(inhibit-startup-screen t)
+ '(package-archives
+   (quote
+    (("gnu" . "http://elpa.gnu.org/packages/")
+     ("melpa" . "https://melpa.org/packages/"))))
  '(safe-local-variable-values (quote ((TeX-master . "thesis")))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -12,6 +18,8 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+(package-initialize)
 
 (setq-default indent-tabs-mode nil)
 (setq column-number-mode t)
