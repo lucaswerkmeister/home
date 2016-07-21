@@ -20,6 +20,10 @@
 
 (package-initialize)
 
+(autoload 'markdown-mode "markdown-mode" "Markdown mode" t)
+(setq auto-mode-alist (cons '("\\.md\\'" . markdown-mode) auto-mode-alist))
+(setq auto-mode-alist (cons '("\\.markdown\\'" . markdown-mode) auto-mode-alist))
+
 (setq-default indent-tabs-mode nil)
 (setq column-number-mode t)
 (fset 'compile-instant
@@ -28,7 +32,6 @@
 (show-paren-mode 1)
 
 (add-to-list 'auto-mode-alist '("\\.nodes\\'" . antlr-mode))
-(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-mode))
 
 (add-to-list 'auto-mode-alist '("PKGBUILD" . shell-script-mode))
