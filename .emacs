@@ -37,4 +37,9 @@
 
 (add-to-list 'auto-mode-alist '("PKGBUILD" . shell-script-mode))
 
+; https://stackoverflow.com/a/24847029/1420237
+(defun unset-quote-hook ()
+  (local-unset-key "\""))
+(add-hook 'LaTeX-mode-hook 'unset-quote-hook)
+
 (if (file-exists-p "~/.emacs_local") (load "~/.emacs_local"))
