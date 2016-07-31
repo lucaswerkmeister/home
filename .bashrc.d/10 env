@@ -5,4 +5,4 @@ set -o noclobber
 HISTCONTROL=ignorespace
 HISTSIZE=-1
 HISTFILESIZE=-1
-export SYSTEMD_LESS=FRSMK # default is FRSXMK; remove X to fix pager not restoring terminal
+export SYSTEMD_LESS=RSMK # default is FRSXMK; remove X to fix pager not restoring terminal, and F because it only makes sense with X
