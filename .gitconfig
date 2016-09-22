@@ -5,10 +5,10 @@
 	lg = log --oneline --graph --decorate --all --author-date-order
 	co = checkout
 	ci = commit
-	df = diff --word-diff=color
+	df = diff --word-diff=color --ignore-all-space
 	ls = ls-files
 	ca = commit -a
-	dc = diff --word-diff=color --cached
+	dc = diff --word-diff=color --ignore-all-space --cached
 	dic = diff --cached
 	conflicts = diff --name-only --diff-filter=U
 [user]
