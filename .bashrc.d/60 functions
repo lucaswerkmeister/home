@@ -66,3 +66,9 @@ sshadd() {
 term() {
     gnome-terminal -e "mosh $1"
 }
+
+# don’t store the history for this session
+
+nohist() {
+    HISTFILE=/dev/null
+}
