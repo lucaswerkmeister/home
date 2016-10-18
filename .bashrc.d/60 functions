@@ -60,3 +60,9 @@ sshadd() {
     done
     ssh-add "${privs[@]}"
 }
+
+# spawn Gnome Terminal window for another host
+
+term() {
+    gnome-terminal -e "mosh $1"
+}
