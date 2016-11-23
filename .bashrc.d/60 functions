@@ -72,3 +72,14 @@ term() {
 nohist() {
     HISTFILE=/dev/null
 }
+
+# “wget” a file from another host
+
+sget() {
+    local host="${1:?First argument must specify host}" name
+    shift 1
+    for path; do
+        name=$(basename -- "$path")
+        ssh -- "$host" curl -- "$path" > "$name"
+    done
+}
