@@ -1,0 +1,3 @@
+#!/bin/bash
+
+alias xclip='xclip -selection c -display :0'

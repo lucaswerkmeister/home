@@ -1,0 +1,37 @@
+#!/bin/bash
+
+function browser {
+    local browser="";
+    if [[ -v DISPLAY ]]; then
+        # we’re in an X server
+        browser="links -driver X"
+    elif [[ ! -v TMUX ]]; then
+        # we’re in a TTY
+        browser="links -driver fb"
+    else
+        # we’re in a regular terminal
+        browser="SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt lynx -cookies"
+    fi
+    local cmd="$browser \"$1\""
+    eval "$cmd"
+}
+
+function g {
+    local IFS='+';
+    browser "https://google.com/search?q=$*";
+}
+
+function d {
+    local IFS='+';
+    browser "https://duckduckgo.com/?q=$*";
+}
+
+function w {
+    local IFS='+';
+    browser "https://de.wikipedia.org/w/index.php?title=Spezial:Suche&search=$*";
+}
+
+function l {
+    local IFS='+';
+    browser "http://dict.leo.org/ende/?lang=de&search=$*";
+}

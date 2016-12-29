@@ -1,0 +1,5 @@
+#!/bin/bash
+
+function nohist {
+    HISTFILE=/dev/null
+}

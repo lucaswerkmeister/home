@@ -1,0 +1,2 @@
+#!/bin/bash
+export SYSTEMD_LESS=RSMK # default is FRSXMK; remove X to fix pager not restoring terminal, and F because it only makes sense with X

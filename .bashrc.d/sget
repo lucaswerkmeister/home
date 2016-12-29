@@ -1,0 +1,10 @@
+#!/bin/bash
+
+function sget {
+    local host="${1:?First argument must specify host}" name
+    shift 1
+    for path; do
+        name=$(basename -- "$path")
+        ssh -- "$host" curl -- "$path" > "$name"
+    done
+}

@@ -1,0 +1,6 @@
+#!/bin/bash
+
+function batlife {
+    echo $(bc <<< "scale = 2; 100 * $(</sys/class/power_supply/BAT0/charge_now) / $(</sys/class/power_supply/BAT0/charge_full)")%
+    upower --show-info /org/freedesktop/UPower/devices/battery_BAT0 | grep --color=no "time to \(full\|empty\)" &&  echo "     (more info with upower --dump)" || echo "     (battery full, more info with upower --dump)"
+}

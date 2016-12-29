@@ -1,0 +1,4 @@
+#!/bin/bash
+HISTCONTROL=ignorespace
+HISTSIZE=-1
+HISTFILESIZE=-1

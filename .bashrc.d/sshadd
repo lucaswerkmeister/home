@@ -1,0 +1,9 @@
+#!/bin/bash
+
+function sshadd {
+    privs=()
+    for pub in ~/.ssh/*.pub; do
+        privs+=("${pub%.pub}")
+    done
+    ssh-add "${privs[@]}"
+}

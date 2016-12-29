@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # At the moment already sourced in /etc/bash_completion.d, but the
 # file comment seems to indicate that this will change in the future,
 # and is only kept currently to ease transitions
@@ -9,16 +9,3 @@ fi
 if [[ -f /usr/share/git/completion/git-prompt.sh ]]; then
     source /usr/share/git/completion/git-prompt.sh
 fi
-
-if [[ -f /etc/profile.d/bash-completion.sh ]]; then
-    source /etc/profile.d/bash-completion.sh
-fi
-
-# source keychain's files
-if [[ -f ~/.keychain/$HOSTNAME-sh ]]; then
-    source ~/.keychain/$HOSTNAME-sh
-fi
-if [[ -f ~/.keychain/$HOSTNAME-sh-gpg ]]; then
-    source ~/.keychain/$HOSTNAME-sh-gpg
-fi
-
