@@ -1,0 +1,16 @@
+#!/bin/bash
+
+function systemd-stop {
+    if (($# != 1)); then
+        printf >&2 'Usage: systemd-stop UNIT\n'
+        return 1
+    fi
+    sudo systemctl kill --kill-who all --signal STOP -- "$1"
+}
+function systemd-cont {
+    if (($# != 1)); then
+        printf >&2 'Usage: systemd-cont UNIT\n'
+        return 1
+    fi
+    sudo systemctl kill --kill-who all --signal CONT -- "$1"
+}    
