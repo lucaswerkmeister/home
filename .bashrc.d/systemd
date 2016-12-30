@@ -1,8 +1,8 @@
 #!/bin/bash
 
-function systemd-stop {
+function systemd-pause {
     if (($# != 1)); then
-        printf >&2 'Usage: systemd-stop UNIT\n'
+        printf >&2 'Usage: systemd-pause UNIT\n'
         return 1
     fi
     sudo systemctl kill --kill-who all --signal STOP -- "$1"
