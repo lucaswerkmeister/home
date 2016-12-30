@@ -13,4 +13,4 @@ function systemd-cont {
         return 1
     fi
     sudo systemctl kill --kill-who all --signal CONT -- "$1"
-}    
+}
