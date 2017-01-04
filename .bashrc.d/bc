@@ -1,0 +1,3 @@
+#!/bin/bash
+
+alias bc='bc -q'
