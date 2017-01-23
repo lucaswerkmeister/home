@@ -10,7 +10,7 @@
    (quote
     (("gnu" . "http://elpa.gnu.org/packages/")
      ("melpa" . "https://melpa.org/packages/"))))
- '(package-selected-packages (quote (haskell-mode tss))))
+ '(package-selected-packages (quote (systemd haskell-mode tss))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
