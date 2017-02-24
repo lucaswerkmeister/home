@@ -35,6 +35,8 @@
 	autocorrect = 10
 [pull]
 	rebase = true
+[transfer]
+	fsckObjects = true
 
 # shortcut remote "protocols":
 # 
