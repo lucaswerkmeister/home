@@ -1,0 +1,10 @@
+#!/bin/bash
+
+function copy-location {
+    curl -sI "${1:?URL argument missing}" | while read -r headerName headerValue; do
+        if [[ $headerName == 'Location:' ]]; then
+            printf '%s' "$headerValue" | xclip -in -selection clipboard
+            return
+        fi
+    done
+}
