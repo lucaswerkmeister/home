@@ -1,5 +1,5 @@
 #!/bin/bash
 
 function term {
-    gnome-terminal -e "mosh $1"
+    gnome-terminal --maximize -e "mosh $1"
 }

@@ -1,5 +1,5 @@
 #!/bin/bash
 
 function lterm {
-    gnome-terminal -e "tmux new-session -s \"$1\" -c \"${2:-~}\""
+    gnome-terminal --maximize -e "tmux new-session -s \"$1\" -c \"${2:-~}\""
 }
