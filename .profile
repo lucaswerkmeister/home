@@ -9,8 +9,10 @@
 #umask 022
 
 # start keychain - before sourcing .bashrc
-keychain #id_rsa
-# the created files will be sourced in .bashrc
+if type keychain &>/dev/null; then
+    keychain #id_rsa
+    # the created files will be sourced in .bashrc
+fi
 
 # if running bash
 if [ -n "$BASH_VERSION" ]; then
