@@ -1,5 +1,13 @@
 #!/bin/bash
 
 function lterm {
-    gnome-terminal --maximize -e "tmux new-session -s \"$1\" -c \"${2:-~}\""
+    local name=$1 location=$2
+    if [[ -z $location ]]; then
+        if [[ -L ~/.config/lterm/$name ]]; then
+            location=$(readlink ~/.config/lterm/"$name")
+        else
+            location=~
+        fi
+    fi
+    gnome-terminal --maximize -- tmux new-session -s "$name" -c "$location"
 }
