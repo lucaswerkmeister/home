@@ -14,3 +14,21 @@ function lterm {
     fi
     gnome-terminal --maximize -- tmux new-session -s "$name" -c "$location"
 }
+
+function _lterm {
+    if [[ $COMP_CWORD == 1 ]]; then
+        COMPREPLY=()
+        for dir in "${XDG_CONFIG_HOME:-$HOME/.config}" ${XDG_CONFIG_DIRS:-/etc/xdg}; do
+            for link in "$dir"/lterm/*; do
+                if [[ -L $link ]]; then
+                    name=${link##*/}
+                    if [[ $name =~ ^"$2" ]]; then
+                        COMPREPLY+=("$name")
+                    fi
+                fi
+            done
+        done
+    fi
+}
+
+complete -o default -o filenames -F _lterm lterm
