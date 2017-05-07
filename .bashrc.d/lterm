@@ -3,11 +3,14 @@
 function lterm {
     local name=$1 location=$2
     if [[ -z $location ]]; then
-        if [[ -L ~/.config/lterm/$name ]]; then
-            location=$(readlink ~/.config/lterm/"$name")
-        else
-            location=~
-        fi
+        location=$HOME
+        local IFS=:
+        for dir in "${XDG_CONFIG_HOME:-$HOME/.config}" ${XDG_CONFIG_DIRS:-/etc/xdg}; do
+            if [[ -L $dir/lterm/$name ]]; then
+                location=$(readlink -- "$dir/lterm/$name")
+                break
+            fi
+        done
     fi
     gnome-terminal --maximize -- tmux new-session -s "$name" -c "$location"
 }
