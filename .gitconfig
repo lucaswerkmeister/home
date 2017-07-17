@@ -11,6 +11,7 @@
 	dc = diff --word-diff=color --ignore-all-space --cached
 	dic = diff --cached
 	conflicts = diff --name-only --diff-filter=U
+	sed = ! git grep -z --full-name -l '.' | xargs -0 sed -i -e
 [user]
 	email = mail@lucaswerkmeister.de
 	name = Lucas Werkmeister
