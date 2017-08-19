@@ -2,7 +2,7 @@
 
 function copy-location {
     curl -sI "${1:?URL argument missing}" | while read -r headerName headerValue; do
-        if [[ $headerName == 'Location:' ]]; then
+        if [[ ${headerName,,} == 'location:' ]]; then
             printf '%s' "$headerValue" | xclip -in -selection clipboard
             return
         fi
