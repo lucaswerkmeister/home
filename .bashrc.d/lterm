@@ -1,5 +1,17 @@
 #!/bin/bash
 
+# Function to (re)open a terminal window with a tmux session inside it.
+# Usage: `lterm name location`, e. g. `lterm etc /etc`,
+# or just `lterm name`.
+# If the location is omitted, the target of a symlink in ~/.config/lterm/ is used,
+# e. g. `ln -s /etc ~/.config/lterm` and then `lterm etc`.
+# If the tmux session already exists, it is reattached,
+# and if a terminal window is already attached to the session,
+# that window is activated and brought to the foreground,
+# so if you have a small library of lterm targets in ~/.config/lterm/,
+# you can essentially always run `lterm name` to bring the terminal “name” up.
+# Tab completion is available.
+
 function lterm {
     local name=$1 location=$2
     if [[ -z $location ]]; then
