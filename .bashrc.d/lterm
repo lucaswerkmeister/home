@@ -13,11 +13,11 @@ function lterm {
         done
     fi
 
-    if tmux has-session -t "$name" &>/dev/null; then
+    if tmux has-session -t "=$name" &>/dev/null; then
         if xdotool search --name "^$name:" windowactivate &>/dev/null; then
             return
         else
-            gnome-terminal --maximize -- tmux attach-session -t "$name" -c "$location"
+            gnome-terminal --maximize -- tmux attach-session -t "=$name" -c "$location"
         fi
     else
         gnome-terminal --maximize -- tmux new-session -s "$name" -c "$location"
