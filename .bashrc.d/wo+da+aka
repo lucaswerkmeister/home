@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# A triple of functions to record and replay the location of physical things (or anything else).
+# Run `da NAME` to store where *NAME* is
+# (write the description to standard input and eventually terminate it with Ctrl+D),
+# `wo NAME` to show where *NAME* is,
+# and `aka NAME ALIAS` to record an alias for *NAME*.
+
 function _woda_dir {
     dir=${XDG_DATA_HOME:-~/.local/share}/woda
     [[ -e $dir ]] || mkdir -- "$dir"

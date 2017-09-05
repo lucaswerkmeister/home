@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# Copy the location header of a redirect URL.
+# The first argument is the URL,
+# which should respond with an HTTP 3xx status code and a location header.
+# That header is then copied to the system clipboard.
+# For example: `copy-location http://tinyurl.com/yakkmzz3`
+
 function copy-location {
     curl -sI "${1:?URL argument missing}" | while read -r headerName headerValue; do
         if [[ ${headerName,,} == 'location:' ]]; then
