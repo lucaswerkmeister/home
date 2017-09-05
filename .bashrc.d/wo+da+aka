@@ -1,0 +1,92 @@
+#!/bin/bash
+
+function _woda_dir {
+    dir=${XDG_DATA_HOME:-~/.local/share}/woda
+    [[ -e $dir ]] || mkdir -- "$dir"
+    [[ -d $dir ]] || { printf >&2 'wo/da: %q is not a directory\n' "$dir"; return 1; }
+    printf '%s' "$dir"
+}
+
+function _woda_was {
+    prompt=$1'? '
+    shift
+    case $# in
+        0)
+            read -rp "$prompt" was;;
+        1)
+            was=$1;;
+        *)
+            if [[ -v WODAEXTRAARGS ]]; then
+                was=$1
+            else
+                printf >&2 '%s: too many arguments\n' "$0"
+                return 1
+            fi
+            ;;
+    esac
+    printf '%s' "$was"
+}
+
+function _woda_path {
+    path=$1
+    path=${path//'%'/'%25'}
+    path=${path//'/'/'%2F'}
+    path=${path//'~'/'%7E'}
+    printf '%s' "$path"
+}
+
+function _woda_unpath {
+    unpath=$1
+    unpath=${unpath//'%7E'/'~'}
+    unpath=${unpath//'%2F'/'/'}
+    unpath=${unpath//'%25'/'%'}
+    printf '%s' "$unpath"
+}
+
+function da {
+    dir=$(_woda_dir) || return $?
+    was=$(_woda_was 'Was ist da' "$@") || return $?
+    waspath=$(_woda_path "$was")
+    if [[ -e $dir/$waspath ]]; then
+        mv -- "$dir/$waspath" "$dir/$waspath~"
+        printf >&2 'Da war %s:\n' "$was"
+        cat -- "$dir/$waspath~"
+    fi
+    printf >&2 'Wo ist %s?\n' "$was"
+    cat > "$dir/$waspath"
+    if ! [[ -e $dir/${waspath,,} ]]; then
+        aka "$was" "${was,,}"
+    fi
+}
+
+function wo {
+    dir=$(_woda_dir) || return $?
+    was=$(_woda_was 'Wo ist was' "$@") || return $?
+    waspath=$(_woda_path "$was")
+    if [[ -e $dir/$waspath ]]; then
+        if [[ -L $dir/$waspath ]]; then
+            name=$(_woda_unpath "$(readlink -- "$dir/$waspath")")
+        else
+            name=$was
+        fi
+        printf >&2 'Da ist %s:\n' "$name"
+        cat -- "$dir/$waspath"
+    elif [[ -e $dir/${waspath,,} ]]; then
+        wo "${was,,}"
+    else
+        printf >&2 'Wie?\n'
+    fi
+}
+
+function aka {
+    dir=$(_woda_dir) || return $?
+    was=$(WODAEXTRAARGS=1 _woda_was 'Was ist es' "$@") || return $?
+    shift
+    aka=$(_woda_was 'Wie heißt es' "$@") || return $?
+    waspath=$(_woda_path "$was")
+    akapath=$(_woda_path "$aka")
+    ln -s -- "$waspath" "$dir/$akapath"
+    if ! [[ -e $dir/${akapath,,} ]]; then
+        aka "$was" "${aka,,}"
+    fi
+}
