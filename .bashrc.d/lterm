@@ -31,12 +31,18 @@ function lterm {
 
     if tmux has-session -t "=$name" &>/dev/null; then
         if xdotool search --name "^$name:" windowactivate &>/dev/null; then
-            return
+            :
         else
             gnome-terminal --maximize -- tmux attach-session -t "=$name" -c "$location"
         fi
     else
         gnome-terminal --maximize -- tmux new-session -s "$name" -c "$location"
+    fi
+    if ((BASH_LINENO == 1 && ${#BASH_SOURCE[@]} == 1)); then
+        # first command of an interactive shell (BASH_SOURCE is just ~/.bashrc.d/lterm):
+        # assume this terminal was just started to launch the other terminal,
+        # and now we may as well remove it
+        exit
     fi
 }
 
