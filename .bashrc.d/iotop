@@ -1,0 +1,36 @@
+#!/bin/bash
+
+function iotop {
+    sandbox=(
+        # DynamicUser=yes allocates a new user for the unit
+        # and implies a whole bunch of other sandboxing options
+        -p DynamicUser=yes
+        # expose a fake /dev with no real devices
+        -p PrivateDevices=yes
+        # DynamicUser=yes implies ProtectHome=read-only (make /root + /home read-only),
+        # we want to go one step further and empty them completely
+        -p ProtectHome=yes
+        # the dynamic user shouldn’t have permissions to mess with these anyways,
+        # but why not sandbox them
+        -p ProtectKernelTunables=yes
+        -p ProtectKernelModules=yes
+        -p ProtectControlGroups=yes
+        # iotop is a Python program, it shouldn’t use any foreign syscall architectures or personalities
+        -p SystemCallArchitectures=native
+        -p LockPersonality=yes
+        # block access to namespaces
+        -p RestrictNamespaces='~'
+        # unfortunately we cannot use PrivateNetwork=yes, apparently iotop needs the real network namespace
+        # but at least we can block IP traffic
+        -p IPAddressDeny=any
+        # and most address families
+        -p RestrictAddressFamilies=AF_NETLINK
+    )
+    privileges=(
+        -p AmbientCapabilities=CAP_NET_ADMIN
+    )
+    sudo systemd-run -qt \
+         "${sandbox[@]}" \
+         "${privileges[@]}" \
+         iotop "$@"
+}
