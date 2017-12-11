@@ -21,7 +21,3 @@ if [ -n "$BASH_VERSION" ]; then
 	source ~/.bashrc
     fi
 fi
-
-if tty | grep -q '/dev/tty*'; then
-    . ~/bin/fbterm-tmux-bash-1
-fi
