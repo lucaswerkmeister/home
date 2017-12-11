@@ -16,9 +16,9 @@ fi
 
 # if running bash
 if [ -n "$BASH_VERSION" ]; then
-    # include .bashrc if it exists
-    if [ -f "$HOME/.bashrc" ]; then
-	. "$HOME/.bashrc"
+    # include .bashrc if it exists and this shell is interactive
+    if [[ -f ~/.bashrc && $- == *i* ]]; then
+	source ~/.bashrc
     fi
 fi
 
