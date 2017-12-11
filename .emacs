@@ -50,4 +50,6 @@
 
 (add-hook 'java-mode-hook (lambda() (setq c-basic-offset 4)))
 
+(xterm-mouse-mode)
+
 (if (file-exists-p "~/.emacs_local") (load "~/.emacs_local"))
