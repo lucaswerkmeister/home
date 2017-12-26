@@ -1,0 +1,5 @@
+#!/bin/bash
+
+function rterm {
+    term mosh "$1"
+}

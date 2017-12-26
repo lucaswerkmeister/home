@@ -1,5 +1,11 @@
 #!/bin/bash
 
 function term {
-    gnome-terminal --maximize -e "mosh $1"
+    gnome-terminal --maximize -- "$@"
+    if ((BASH_LINENO == 1 && ${#BASH_SOURCE[@]} == 2)); then
+        # first command of an interactive shell (BASH_SOURCE is just ~/.bashrc.d/term and ~/.bashrc.d/{l,r}term):
+        # assume this terminal was just started to launch the other terminal,
+        # and now we may as well remove it
+        exit
+    fi
 }
