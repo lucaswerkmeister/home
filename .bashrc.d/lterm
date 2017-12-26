@@ -89,7 +89,7 @@ function activate-window-gnome-shell {
             return found;
         })();
     ' | (
-        read -r bs true result
+        IFS=' ' read -r bs true result
         [[ $bs == bs ]] || { printf >&2 'dbus call org.gnome.Shell.Eval: expected return type bs but was %q\n' "$bs"; exit 1; }
         [[ $true == true ]] || { printf >&2 'dbus call org.gnome.Shell.Eval: expected success=true but was %q\nResult: %s\n' "$true" "$result"; exit 1; }
         [[ $result == '"true"' ]] || exit 1
