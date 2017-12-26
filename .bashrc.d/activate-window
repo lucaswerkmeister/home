@@ -1,0 +1,39 @@
+#!/bin/bash
+
+# Attempt to activate a window with a title that matches the given pattern.
+#
+# The pattern is a POSIX Extended Regular Expression when using xdotool
+# and an ECMAScript regular expression pattern when using GNOME Shell,
+# though as far as I know the latter is a strict superset of the former.
+# In both cases, the pattern is case-insensitive.
+
+function activate-window {
+    activate-window-gnome-shell "$1" || activate-window-xdotool "$1"
+}
+
+function activate-window-gnome-shell {
+    busctl --user call org.gnome.Shell /org/gnome/Shell org.gnome.Shell Eval s '
+        (function() {
+            let found = false;
+            for ( const actor of global.get_window_actors() ) {
+                const window = actor.get_meta_window(),
+                      title = window.get_title();
+                if ( /'"${1//'/'/'\/'}"'/i.test( title ) ) {
+                    window.activate( global.get_current_time() );
+                    found = true;
+                    break;
+                }
+            }
+            return found;
+        })();
+    ' | (
+        IFS=' ' read -r bs true result
+        [[ $bs == bs ]] || { printf >&2 'dbus call org.gnome.Shell.Eval: expected return type bs but was %q\n' "$bs"; exit 1; }
+        [[ $true == true ]] || { printf >&2 'dbus call org.gnome.Shell.Eval: expected success=true but was %q\nResult: %s\n' "$true" "$result"; exit 1; }
+        [[ $result == '"true"' ]] || exit 1
+    )
+}
+
+function activate-window-xdotool {
+    xdotool search --name "$1" windowactivate &>/dev/null
+}
