@@ -1,1 +1,2 @@
+#!/bin/bash
 alias strace='strace -E LC_ALL=C'
