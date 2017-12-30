@@ -1,18 +1,18 @@
 #!/bin/bash
 
 function systemd-pause {
-    if (($# != 1)); then
-        printf >&2 'Usage: systemd-pause UNIT\n'
+    if (($# < 1)); then
+        printf >&2 'Usage: systemd-pause UNIT...\n'
         return 1
     fi
-    sudo systemctl kill --kill-who all --signal STOP -- "$1"
+    sudo systemctl kill --kill-who all --signal STOP -- "$@"
 }
 function systemd-cont {
-    if (($# != 1)); then
-        printf >&2 'Usage: systemd-cont UNIT\n'
+    if (($# < 1)); then
+        printf >&2 'Usage: systemd-cont UNIT...\n'
         return 1
     fi
-    sudo systemctl kill --kill-who all --signal CONT -- "$1"
+    sudo systemctl kill --kill-who all --signal CONT -- "$@"
 }
 
 function _systemctl_kill {
