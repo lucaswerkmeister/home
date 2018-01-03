@@ -14,6 +14,16 @@ function systemd-cont {
     fi
     sudo systemctl kill --kill-who all --signal CONT -- "$@"
 }
+function systemd-pidof {
+    if (($# != 1)); then
+        printf >&2 'Usage: systemd-pidof UNIT\n'
+        return 1
+    fi
+    local mainpid
+    mainpid=$(systemctl show --property=MainPID "$1")
+    mainpid=${mainpid#MainPID=}
+    printf '%d\n' "$mainpid"
+}
 
 function _systemctl_kill {
     if ! type __filter_units_by_property &>/dev/null; then
@@ -23,4 +33,4 @@ function _systemctl_kill {
     comps=$(__filter_units_by_property --system CanStop yes $(__get_active_units --system))
     COMPREPLY=($(compgen -W '$comps' -- "${COMP_WORDS[COMP_CWORD]}"))
 }
-complete -F _systemctl_kill systemd-pause systemd-cont
+complete -F _systemctl_kill systemd-pause systemd-cont systemd-pidof
