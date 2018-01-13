@@ -3,3 +3,11 @@
 function rterm {
     term mosh "$1"
 }
+
+function _rterm {
+    local cur prev words cword
+    _init_completion || return
+    _known_hosts_real -a "$cur"
+}
+
+complete -F _rterm rterm
