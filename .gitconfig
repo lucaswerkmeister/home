@@ -82,3 +82,5 @@
     insteadOf = "gist_:"
     pushInsteadOf = "gist:"
     pushInsteadOf = "gist_:"
+[log]
+	follow = true
