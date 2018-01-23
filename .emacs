@@ -34,6 +34,8 @@
 (global-set-key [f12] 'compile-instant)
 (show-paren-mode 1)
 
+(global-auto-revert-mode t)
+
 (add-to-list 'auto-mode-alist '("\\.nodes\\'" . antlr-mode))
 (add-to-list 'auto-mode-alist '("\\.pl\\'" . prolog-mode))
 (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-mode))
