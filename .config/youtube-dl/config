@@ -1,0 +1,8 @@
+# write metadata to video file’s extended attributes
+--xattrs
+# add metadata to video file itself
+--add-metadata
+# download subtitles
+--write-sub
+--all-subs
+--embed-subs
