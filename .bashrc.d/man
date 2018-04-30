@@ -1,0 +1,8 @@
+#!/bin/bash
+function man {
+    if (($# == 1)) && help -- "$1" &>/dev/null; then
+        help -- "$1" | ${MANPAGER:-${PAGER:-less}}
+    else
+        command man "$@"
+    fi
+}
