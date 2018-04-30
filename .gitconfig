@@ -47,6 +47,8 @@
 # - ghlw_: github/lucaswerkmeister, private
 # - ghc:   github/ceylon, public
 # - ghc_:  github/ceylon, private
+# - ghe:   github/eclipse, public
+# - ghe_:  github/eclipse, private
 # - gist:  gist, public
 # - gist_: gist, private
 # 
@@ -61,6 +63,8 @@
     insteadOf = "ghlw:"
 [url "https://github.com/ceylon/"]
     insteadOf = "ghc:"
+[url "https://github.com/eclipse/"]
+    insteadOf = "ghe:"
 [url "https://gist.github.com/"]
     insteadOf = "gist:"
 [url "github:"]
@@ -78,6 +82,11 @@
     pushInsteadOf = "ghc:"
     pushInsteadOf = "https://github.com/ceylon/"
     pushInsteadOf = "ghc_:"
+[url "github:eclipse/"]
+    insteadOf = "ghe_:"
+    pushInsteadOf = "ghe:"
+    pushInsteadOf = "https://github.com/eclipse/"
+    pushInsteadOf = "ghe_:"
 [url "github-gist:"]
     insteadOf = "gist_:"
     pushInsteadOf = "gist:"
