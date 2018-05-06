@@ -22,8 +22,8 @@ function lterm {
         location=$HOME
         local IFS=:
         for dir in "${XDG_CONFIG_HOME:-$HOME/.config}" ${XDG_CONFIG_DIRS:-/etc/xdg}; do
-            if [[ -L $dir/lterm/$name ]]; then
-                location=$(readlink -- "$dir/lterm/$name")
+            if target=$(readlink -- "$dir/lterm/$name"); then
+                location=$target
                 break
             fi
         done
