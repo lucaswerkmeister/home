@@ -58,38 +58,38 @@
 # (hosts `github`, `github-gist` are set up in SSH config)
 
 [url "https://github.com/"]
-    insteadOf = "gh:"
+	insteadOf = "gh:"
 [url "https://github.com/lucaswerkmeister/"]
-    insteadOf = "ghlw:"
+	insteadOf = "ghlw:"
 [url "https://github.com/ceylon/"]
-    insteadOf = "ghc:"
+	insteadOf = "ghc:"
 [url "https://github.com/eclipse/"]
-    insteadOf = "ghe:"
+	insteadOf = "ghe:"
 [url "https://gist.github.com/"]
-    insteadOf = "gist:"
+	insteadOf = "gist:"
 [url "github:"]
-    insteadOf = "gh_:"
-    pushInsteadOf = "gh:"
-    pushInsteadOf = "https://github.com/"
-    pushInsteadOf = "gh_:"
+	insteadOf = "gh_:"
+	pushInsteadOf = "gh:"
+	pushInsteadOf = "https://github.com/"
+	pushInsteadOf = "gh_:"
 [url "github:lucaswerkmeister/"]
-    insteadOf = "ghlw_:"
-    pushInsteadOf = "ghlw:"
-    pushInsteadOf = "https://github.com/lucaswerkmeister/"
-    pushInsteadOf = "ghlw_:"
+	insteadOf = "ghlw_:"
+	pushInsteadOf = "ghlw:"
+	pushInsteadOf = "https://github.com/lucaswerkmeister/"
+	pushInsteadOf = "ghlw_:"
 [url "github:ceylon/"]
-    insteadOf = "ghc_:"
-    pushInsteadOf = "ghc:"
-    pushInsteadOf = "https://github.com/ceylon/"
-    pushInsteadOf = "ghc_:"
+	insteadOf = "ghc_:"
+	pushInsteadOf = "ghc:"
+	pushInsteadOf = "https://github.com/ceylon/"
+	pushInsteadOf = "ghc_:"
 [url "github:eclipse/"]
-    insteadOf = "ghe_:"
-    pushInsteadOf = "ghe:"
-    pushInsteadOf = "https://github.com/eclipse/"
-    pushInsteadOf = "ghe_:"
+	insteadOf = "ghe_:"
+	pushInsteadOf = "ghe:"
+	pushInsteadOf = "https://github.com/eclipse/"
+	pushInsteadOf = "ghe_:"
 [url "github-gist:"]
-    insteadOf = "gist_:"
-    pushInsteadOf = "gist:"
-    pushInsteadOf = "gist_:"
+	insteadOf = "gist_:"
+	pushInsteadOf = "gist:"
+	pushInsteadOf = "gist_:"
 [log]
 	follow = true
