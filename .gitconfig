@@ -38,6 +38,8 @@
 	rebase = true
 [transfer]
 	fsckObjects = true
+[log]
+	follow = true
 
 # shortcut remote "protocols":
 # 
@@ -91,5 +93,3 @@
 	insteadOf = "gist_:"
 	pushInsteadOf = "gist:"
 	pushInsteadOf = "gist_:"
-[log]
-	follow = true
