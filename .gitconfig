@@ -40,6 +40,11 @@
 	fsckObjects = true
 [log]
 	follow = true
+[sendemail]
+	smtpEncryption = tls
+	smtpServer = lucaswerkmeister.de
+	smtpUser = mail@lucaswerkmeister.de
+	smtpServerPort = 587
 
 # shortcut remote "protocols":
 # 
