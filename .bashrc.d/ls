@@ -1,4 +1,4 @@
 #!/bin/bash
 
 alias ls='ls --color=auto'
-alias ll='ls --almost-all -l --size --human-readable'
+alias ll='ls --almost-all -l --size --human-readable -v'
