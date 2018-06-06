@@ -45,6 +45,8 @@
 	smtpServer = lucaswerkmeister.de
 	smtpUser = mail@lucaswerkmeister.de
 	smtpServerPort = 587
+[notes]
+	rewriteRef = refs/notes/commits
 
 # shortcut remote "protocols":
 # 
