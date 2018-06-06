@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# A function to switch to a tmux session, creating it if necessary.
+#
+# Usage: same as `lterm`, except that the current tmux session is switched.
+
+function cterm {
+    local name=$1 location=$(term-location "$@")
+
+    if ! tmux has-session -t "=$name" &>/dev/null; then
+        tmux new-session -d -s "$name" -c "$location"
+    fi
+    tmux switch-client -t "=$name"
+}
+
+complete -o default -o filenames -F _lterm cterm
