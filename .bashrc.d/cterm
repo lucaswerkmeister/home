@@ -10,7 +10,11 @@ function cterm {
     if ! tmux has-session -t "=$name" &>/dev/null; then
         tmux new-session -d -s "$name" -c "$location"
     fi
-    tmux switch-client -t "=$name"
+    if [[ -v TMUX ]]; then
+        tmux switch-client -t "=$name"
+    else
+        tmux attach -t "=$name"
+    fi
 }
 
 complete -o default -o filenames -F _lterm cterm
