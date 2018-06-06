@@ -1,0 +1,16 @@
+#!/bin/bash
+
+function term-location {
+    local name=$1 location=$2
+    if [[ -z $location ]]; then
+        location=$HOME
+        local IFS=:
+        for dir in "${XDG_CONFIG_HOME:-$HOME/.config}" ${XDG_CONFIG_DIRS:-/etc/xdg}; do
+            if target=$(readlink -- "$dir/lterm/$name"); then
+                location=$target
+                break
+            fi
+        done
+    fi
+    printf '%s\n' "$location"
+}
