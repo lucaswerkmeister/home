@@ -1,0 +1,43 @@
+#!/bin/bash
+
+function make-install {
+    sandbox=(
+        # no setuid binaries
+        -p NoNewPrivileges=yes
+        # no capabilities
+        -p CapabilityBoundingSet=
+        # no system modification
+        -p ProtectSystem=strict
+        -p PrivateDevices=yes
+        -p ProtectKernelTunables=yes
+        -p ProtectControlGroups=yes
+        -p ProtectKernelModules=yes
+        -p ProtectControlGroups=yes
+        -p RestrictNamespaces=yes
+        # no network access
+        -p PrivateNetwork=yes
+        -p IPAddressDeny=any
+        -p RestrictAddressFamilies=
+        # no weird tricks
+        -p LockPersonality=yes
+        -p MemoryDenyWriteExecute=yes
+        -p RestrictRealtime=yes
+        -p SystemCallArchitectures=native
+        # no root-exclusive system calls
+        -p SystemCallFilter='~@privileged'
+        # no access to private files
+        -p InaccessiblePaths='-/etc/shadow -/etc/gshadow -/var/lib/sudo -/etc/ssh -/etc/opendkim -/var/lib/tor'
+    )
+    privileges=(
+        # make needs to run in the source directory
+        -p WorkingDirectory="$PWD"
+        # the source directory is often under ~/git/, and make needs to be able to read that
+        -p CapabilityBoundingSet=CAP_DAC_READ_SEARCH
+        # installation target directory needs to be writable
+        -p ReadWritePaths=/usr/local/
+    )
+    sudo systemd-run -qt \
+         "${sandbox[@]}" \
+         "${privileges[@]}" \
+         make install "$@"
+}
