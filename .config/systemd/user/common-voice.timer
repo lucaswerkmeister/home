@@ -1,0 +1,10 @@
+[Unit]
+Description=Remind me to contribute to Common Voice daily
+
+[Timer]
+OnCalendar=23:15
+Persistent=no
+
+[Install]
+WantedBy=timers.target
+

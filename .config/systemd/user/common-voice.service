@@ -1,0 +1,6 @@
+[Unit]
+Description=Remind me to contribute to Common Voice
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/notify-send --urgency=low --expire-time=60000 'Common Voice?'
