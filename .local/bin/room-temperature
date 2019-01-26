@@ -1,0 +1,40 @@
+#!/bin/bash
+
+export LC_NUMERIC=C
+
+tempKs=()
+
+while IFS= read -r object; do
+    if ! [[ $object == /org/freedesktop/UDisks2/drives/* ]]; then
+        continue # not a hard drive
+    fi
+    if ! output=$(busctl get-property org.freedesktop.UDisks2 "$object" org.freedesktop.UDisks2.Drive Removable 2>/dev/null); then
+        continue # cannot determine if removable (unexpected)
+    fi
+    if [[ $output != 'b true' ]]; then
+        continue # not removable, likely interior and therefore warmer than room temperature
+    fi
+    if ! output=$(busctl get-property org.freedesktop.UDisks2 "$object" org.freedesktop.UDisks2.Drive.Ata SmartTemperature 2>/dev/null); then
+        continue # cannot read S.M.A.R.T. temperature (e. g. not an ATA drive)
+    fi
+    if ! [[ $output =~ 'd '([[:digit:]]+('.'[[:digit:]]+)?) ]]; then
+        continue # cannot parse output (unexpected)
+    fi
+    tempK=${BASH_REMATCH[1]}
+    if [[ $tempK == '0' ]]; then
+        continue # does not have a thermometer
+    fi
+    tempKs+=("$tempK")
+done < <(busctl tree --list org.freedesktop.UDisks2)
+
+if ((${#tempKs[@]} > 0)); then
+    tempCAvg=$({
+                  printf 'scale=2; (%s' "${tempKs[0]}"
+                  printf '+%s' "${tempKs[@]:1}"
+                  printf ')/%s - 273.15\n' "${#tempKs[@]}"
+              } | bc)
+    printf 'It is approximately %.2f°C in the room.\n' "$tempCAvg"
+else
+    printf 'You do not appear to have any external hard disks with a thermometer.\n'
+    exit 69 # EX_UNAVAILABLE in sysexits.h
+fi
