@@ -18,7 +18,7 @@ if ((ASCIINEMA_REC)); then
     export PS1="\[$TPUT_BOLD$TPUT_BLUE\]\w \[$TPUT_GREEN\]\$\[$TPUT_RESET\] "
 elif [[ $HOSTNAME = lucaswerkmeister.de ]]; then
     # server has older bash whose __git_ps1 doesn't support two-argument form
-    # it also doesn't supporte GIT_PS1_SHOWCOLORHINTS :(
+    # it also doesn't support GIT_PS1_SHOWCOLORHINTS :(
     export PS1="\[$TPUT_RESET$TPUT_BOLD$TPUT_GREEN\]\u@\h \[$TPUT_BLUE\]\w\[$TPUT_RESET\]\$(__git_ps1 ' (%s)') \[$TPUT_BOLD$TPUT_GREEN\]\$\[$TPUT_RESET\] "
 else
     export PROMPT_COMMAND='__git_ps1 "\[$TPUT_RESET$TPUT_BOLD$TPUT_GREEN\]\u@\h \[$TPUT_BLUE\]\w\[$TPUT_RESET\]" " \[$TPUT_BOLD$TPUT_GREEN\]\$\[$TPUT_RESET\] "'
