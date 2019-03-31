@@ -1,0 +1,26 @@
+#!/bin/bash
+
+if (($# != 1)); then
+    printf >&2 '%s: expected 1 argument, got %d\n' "$0" "$#"
+    exit 1
+fi
+
+IFS=. read -r tool database rest <<< "$1"
+if [[ ! $tool || ! $database || $rest ]]; then
+    printf >&2 '%s: expected argument to have format TOOL.DATABASE\n' "$0"
+    exit 1
+fi
+
+export SSH_ASKPASS=/bin/false
+
+if ! ssh toolforge true; then
+    printf '%s\n' 'cannot connect to Toolforge, skipping'
+    exit 0
+fi
+
+mkdir -p "${XDG_DATA_HOME:-$HOME/.local/share}/toolsdb-backup/$tool/$database/"
+
+ssh toolforge \
+    become "$tool" \
+    mysqldump --defaults-file=~/replica.my.cnf --host=tools.db.svc.eqiad.wmflabs "$database" \
+    > "${XDG_DATA_HOME:-$HOME/.local/share}/toolsdb-backup/$tool/$database/$(date -I).sql"

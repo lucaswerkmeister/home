@@ -1,0 +1,6 @@
+[Unit]
+Description=Back up Toolforge database %I
+
+[Service]
+Type=oneshot
+ExecStart=%h/.local/bin/backup-toolsdb %I
