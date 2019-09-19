@@ -23,4 +23,7 @@ mkdir -p "${XDG_DATA_HOME:-$HOME/.local/share}/toolsdb-backup/$tool/$database/"
 ssh toolforge \
     become "$tool" \
     mysqldump --defaults-file=~/replica.my.cnf --host=tools.db.svc.eqiad.wmflabs "$database" \
-    > "${XDG_DATA_HOME:-$HOME/.local/share}/toolsdb-backup/$tool/$database/$(date -I).sql"
+    \| zstd \
+    | zstd -d \
+    | xz \
+    > "${XDG_DATA_HOME:-$HOME/.local/share}/toolsdb-backup/$tool/$database/$(date -I).sql.xz"
