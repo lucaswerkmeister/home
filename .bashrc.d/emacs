@@ -1,4 +1,4 @@
 #!/bin/bash
 
-alias emacs='emacs -nw'
-alias info='emacs -f info-standalone'
+alias emacs='emacsclient -q -t'
+alias info='\emacs -nw -f info-standalone'
