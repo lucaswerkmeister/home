@@ -40,6 +40,8 @@
 	fsckObjects = true
 [log]
 	follow = true
+[diff]
+	colorMoved = dimmed-zebra
 [sendemail]
 	smtpEncryption = tls
 	smtpServer = lucaswerkmeister.de
