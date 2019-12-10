@@ -30,7 +30,9 @@ done < <(busctl tree --list org.freedesktop.UDisks2)
 if ((${#tempKs[@]} > 0)); then
     tempCAvg=$({
                   printf 'scale=2; (%s' "${tempKs[0]}"
-                  printf '+%s' "${tempKs[@]:1}"
+                  if ((${#tempKs[@]} > 1)); then
+                      printf '+%s' "${tempKs[@]:1}"
+                  fi
                   printf ')/%s - 273.15\n' "${#tempKs[@]}"
               } | bc)
     printf 'It is approximately %.2f°C in the room.\n' "$tempCAvg"
