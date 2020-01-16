@@ -48,7 +48,6 @@
 (autoload 'LilyPond-mode "lilypond-mode.el" "LilyPond mode" t)
 (add-to-list 'load-path "/usr/share/emacs/site-lisp") ; the lilypond package installs elisp files outside the version-specific directory
 (add-to-list 'auto-mode-alist '("\\.ly\\'" . LilyPond-mode))
-(add-hook 'LilyPond-mode-hook 'server-start) ; the lilypond-invoke-editor command, which is associated with the textedit: protocol (which LilyPond uses for hyperlinks to corresponding source code locations in the generated PDF), calls emacsclient; if the server is started, this has the effect of navigating to the correct location in the already opened editor
 
 (setq-default indent-tabs-mode nil)
 (setq column-number-mode t)
