@@ -49,6 +49,8 @@
 	smtpServerPort = 587
 [notes]
 	rewriteRef = refs/notes/commits
+[protocol]
+	version = 2
 
 # shortcut remote "protocols":
 # 
@@ -62,11 +64,13 @@
 # - ghe_:  github/eclipse, private
 # - gist:  gist, public
 # - gist_: gist, private
+# - wmg:   wikimedia gerrit, public
+# - wmge:  wikimedia gerrit mediawiki/extensions, public
 # 
 # public: pull over HTTPS, push over SSH;
 # private: pull and push over SSH
 # 
-# (hosts `github`, `github-gist` are set up in SSH config)
+# (hosts `github`, `github-gist`, `gerrit` are set up in SSH config)
 
 [url "https://github.com/"]
 	insteadOf = "gh:"
@@ -78,6 +82,10 @@
 	insteadOf = "ghe:"
 [url "https://gist.github.com/"]
 	insteadOf = "gist:"
+[url "https://gerrit.wikimedia.org/r/"]
+	insteadOf = "wmg:"
+[url "https://gerrit.wikimedia.org/r/mediawiki/extensions/"]
+	insteadOf = "wmge:"
 [url "github:"]
 	insteadOf = "gh_:"
 	pushInsteadOf = "gh:"
@@ -102,3 +110,7 @@
 	insteadOf = "gist_:"
 	pushInsteadOf = "gist:"
 	pushInsteadOf = "gist_:"
+[url "gerrit:"]
+	pushInsteadOf = "wmg:"
+[url "gerrit:mediawiki/extensions/"]
+	pushInsteadOf = "wmge:"
