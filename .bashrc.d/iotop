@@ -1,7 +1,7 @@
 #!/bin/bash
 
 function iotop {
-    sandbox=(
+    local sandbox=(
         # DynamicUser=yes allocates a new user for the unit
         # and implies a whole bunch of other sandboxing options
         -p DynamicUser=yes
@@ -26,7 +26,7 @@ function iotop {
         # and most address families
         -p RestrictAddressFamilies=AF_NETLINK
     )
-    privileges=(
+    local privileges=(
         -p AmbientCapabilities=CAP_NET_ADMIN
     )
     sudo systemd-run -qt \
