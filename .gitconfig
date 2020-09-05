@@ -47,6 +47,7 @@
 	smtpServer = lucaswerkmeister.de
 	smtpUser = mail@lucaswerkmeister.de
 	smtpServerPort = 587
+	confirm = always
 [notes]
 	rewriteRef = refs/notes/commits
 [protocol]
