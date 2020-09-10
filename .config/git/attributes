@@ -1,0 +1,8 @@
+*.bibtex diff=bibtex
+*.css diff=css
+*.html diff=html
+*.java diff=java
+*.md diff=markdown
+*.php diff=php
+*.py diff=python
+*.tex diff=tex
