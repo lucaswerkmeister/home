@@ -43,7 +43,7 @@
 (setq auto-mode-alist (cons '("\\.markdown\\'" . markdown-mode) auto-mode-alist))
 
 (autoload 'php-mode "php-mode.el" "PH mode" t)
-(setq auto-mode-alist (append '(("/.*\.php[345]?" . php-mode)) auto-mode-alist))
+(setq auto-mode-alist (append '(("\\.php[345]?\\'" . php-mode)) auto-mode-alist))
 
 (autoload 'LilyPond-mode "lilypond-mode.el" "LilyPond mode" t)
 (add-to-list 'load-path "/usr/share/emacs/site-lisp") ; the lilypond package installs elisp files outside the version-specific directory
