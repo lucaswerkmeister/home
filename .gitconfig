@@ -115,3 +115,5 @@
 	pushInsteadOf = "wmg:"
 [url "gerrit:mediawiki/extensions/"]
 	pushInsteadOf = "wmge:"
+[init]
+	defaultBranch = main
