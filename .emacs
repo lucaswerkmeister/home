@@ -59,9 +59,6 @@
   (local-unset-key "\""))
 (add-hook 'LaTeX-mode-hook 'unset-quote-hook)
 
-(setq c-default-style "linux"
-      c-basic-offset 2)
-
 (add-hook 'java-mode-hook (lambda() (setq c-basic-offset 4)))
 
 (xterm-mouse-mode)
