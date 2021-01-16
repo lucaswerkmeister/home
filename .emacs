@@ -12,7 +12,8 @@
      ("melpa" . "https://melpa.org/packages/")))
  '(package-selected-packages (quote (graphviz-dot-mode systemd haskell-mode tss)))
  '(safe-local-variable-values
-   '((eval c-set-offset 'arglist-cont-nonempty
+   '((make-backup-files)
+     (eval c-set-offset 'arglist-cont-nonempty
            '(c-lineup-gcc-asm-reg c-lineup-arglist))
      (eval c-set-offset 'arglist-close 0)
      (eval c-set-offset 'arglist-intro '++)
