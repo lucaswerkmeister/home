@@ -8,27 +8,15 @@
  '(LilyPond-pdf-command "evince")
  '(inhibit-startup-screen t)
  '(package-archives
-   (quote
-    (("gnu" . "http://elpa.gnu.org/packages/")
-     ("melpa" . "https://melpa.org/packages/"))))
+   '(("gnu" . "http://elpa.gnu.org/packages/")
+     ("melpa" . "https://melpa.org/packages/")))
  '(package-selected-packages (quote (graphviz-dot-mode systemd haskell-mode tss)))
  '(safe-local-variable-values
-   (quote
-    ((eval c-set-offset
-           (quote arglist-close)
-           0)
-     (eval c-set-offset
-           (quote arglist-intro)
-           (quote ++))
-     (eval c-set-offset
-           (quote case-label)
-           0)
-     (eval c-set-offset
-           (quote statement-case-open)
-           0)
-     (eval c-set-offset
-           (quote substatement-open)
-           0)))))
+   '((eval c-set-offset 'arglist-close 0)
+     (eval c-set-offset 'arglist-intro '++)
+     (eval c-set-offset 'case-label 0)
+     (eval c-set-offset 'statement-case-open 0)
+     (eval c-set-offset 'substatement-open 0))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
