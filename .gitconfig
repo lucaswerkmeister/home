@@ -12,6 +12,8 @@
 	dic = diff --cached
 	conflicts = diff --name-only --diff-filter=U
 	sed = ! git grep -z --full-name -l '.' "$GIT_PREFIX" | xargs -0 sed -i -e
+	why = blame
+	how-old = blame
 [user]
 	email = mail@lucaswerkmeister.de
 	name = Lucas Werkmeister
