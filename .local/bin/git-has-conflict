@@ -1,0 +1,56 @@
+#!/usr/bin/env bash
+
+# Checks if there are merge conflicts between two branches. Usage:
+#
+# Compare any two branches:
+#     git has-conflict branch1 branch2
+#
+# Check if a branch conflicts against the current branch:
+#     git has-conflict branch
+#
+# Check if the current and previous branch conflict:
+#     git has-conflict
+
+case $# in
+    0)
+        this=@
+        that=@{-1}
+        ;;
+    1)
+        this=@
+        if [[ $(git rev-parse -- "$1") == $(git rev-parse @) ]]; then
+            that=@{-1}
+        else
+            that=$1
+        fi
+        ;;
+    2)
+        this=$1
+        that=$2
+        ;;
+    *)
+        printf >&2 '%s: too many arguments (expecting at most 2): %d\n' "$0" "$#"
+        exit 1
+        ;;
+esac
+
+if ! base=$(git merge-base -- "$this" "$that"); then
+    printf >&2 '%s: no merge base\n' "$0"
+    exit 1
+fi
+
+conflicts=$(git merge-tree "$base" "$this" "$that" | grep -c '^+<<<<<<<')
+case $conflicts in
+    0)
+        printf 'There is no conflict.\n'
+        exit 0
+        ;;
+    1)
+        printf 'There is 1 conflict.\n'
+        exit 1
+        ;;
+    *)
+        printf 'There are %d conflicts.\n' "$conflicts"
+        exit 1
+        ;;
+esac
