@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+function _git_has_conflict {
+    __git_complete_refs
+}

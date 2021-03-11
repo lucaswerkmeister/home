@@ -10,6 +10,13 @@
 #
 # Check if the current and previous branch conflict:
 #     git has-conflict
+#
+# To enable Bash completion for this command, define a function _git_has_conflict
+# and make it call e.g. __git_complete_refs (or another function, like __git_heads):
+#
+#     function _git_has_conflict {
+#         __git_complete_refs
+#     }
 
 case $# in
     0)
