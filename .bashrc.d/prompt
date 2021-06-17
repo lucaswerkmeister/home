@@ -1,10 +1,10 @@
 #!/bin/bash
-export GIT_PS1_SHOWDIRTYSTATE=1                 # show dirty files with a '*' (unstaged) and a '+' (staged)
-export GIT_PS1_SHOWSTASHSTATE=1                 # show stashed changes with a '$'
-#export GIT_PS1_SHOWUNTRACKEDFILES=1            # show untracked files with a '%'
-export GIT_PS1_SHOWUPSTREAM="git verbose"       # git: don't bother checking for an svn repository; verbose: show the number of commits ahead/behind
-export GIT_PS1_DESCRIBE_STYLE="branch"          # branch: relative to newer tag or branch (master~4)
-export GIT_PS1_SHOWCOLORHINTS=1                 # color the various parts of the dirty state
+GIT_PS1_SHOWDIRTYSTATE=1                 # show dirty files with a '*' (unstaged) and a '+' (staged)
+GIT_PS1_SHOWSTASHSTATE=1                 # show stashed changes with a '$'
+#GIT_PS1_SHOWUNTRACKEDFILES=1            # show untracked files with a '%'
+GIT_PS1_SHOWUPSTREAM="git verbose"       # git: don't bother checking for an svn repository; verbose: show the number of commits ahead/behind
+GIT_PS1_DESCRIBE_STYLE="branch"          # branch: relative to newer tag or branch (master~4)
+GIT_PS1_SHOWCOLORHINTS=1                 # color the various parts of the dirty state
 
 # if invoked with two arguments, __git_ps1 sets PS1 to "first argument" "own output" "second argument", prepending its own output with a space if there is one
 TPUT_RESET="$(tput sgr0)"
@@ -14,12 +14,12 @@ TPUT_BLUE="$(tput setaf 4)"
 
 if ((ASCIINEMA_REC)); then
     # minimal prompt for asciinema
-    unset PROMPT_COMMAND # might be inherited from outer shell, make sure it’s gone
-    export PS1="\[$TPUT_BOLD$TPUT_BLUE\]\w \[$TPUT_GREEN\]\$\[$TPUT_RESET\] "
+    unset PROMPT_COMMAND # in case it’s inherited
+    PS1="\[$TPUT_BOLD$TPUT_BLUE\]\w \[$TPUT_GREEN\]\$\[$TPUT_RESET\] "
 elif [[ $HOSTNAME = lucaswerkmeister.de ]]; then
     # server has older bash whose __git_ps1 doesn't support two-argument form
     # it also doesn't support GIT_PS1_SHOWCOLORHINTS :(
-    export PS1="\[$TPUT_RESET$TPUT_BOLD$TPUT_GREEN\]\u@\h \[$TPUT_BLUE\]\w\[$TPUT_RESET\]\$(__git_ps1 ' (%s)') \[$TPUT_BOLD$TPUT_GREEN\]\$\[$TPUT_RESET\] "
+    PS1="\[$TPUT_RESET$TPUT_BOLD$TPUT_GREEN\]\u@\h \[$TPUT_BLUE\]\w\[$TPUT_RESET\]\$(__git_ps1 ' (%s)') \[$TPUT_BOLD$TPUT_GREEN\]\$\[$TPUT_RESET\] "
 else
-    export PROMPT_COMMAND='__git_ps1 "\[$TPUT_RESET$TPUT_BOLD$TPUT_GREEN\]\u@\h \[$TPUT_BLUE\]\w\[$TPUT_RESET\]" " \[$TPUT_BOLD$TPUT_GREEN\]\$\[$TPUT_RESET\] "'
+    PROMPT_COMMAND='__git_ps1 "\[$TPUT_RESET$TPUT_BOLD$TPUT_GREEN\]\u@\h \[$TPUT_BLUE\]\w\[$TPUT_RESET\]" " \[$TPUT_BOLD$TPUT_GREEN\]\$\[$TPUT_RESET\] "'
 fi
