@@ -35,7 +35,7 @@ if ((${#tempKs[@]} > 0)); then
                   fi
                   printf ')/%s - 273.15\n' "${#tempKs[@]}"
               } | bc)
-    printf 'It is approximately %.2f°C in the room.\n' "$tempCAvg"
+    printf 'It is approximately %.2f°C in the room (n=%s).\n' "$tempCAvg" "${#tempKs[@]}"
 else
     printf 'You do not appear to have any external hard disks with a thermometer.\n'
     exit 69 # EX_UNAVAILABLE in sysexits.h
