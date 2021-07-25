@@ -16,10 +16,6 @@ if ((ASCIINEMA_REC)); then
     # minimal prompt for asciinema
     unset PROMPT_COMMAND # in case it’s inherited
     PS1="\[$TPUT_BOLD$TPUT_BLUE\]\w \[$TPUT_GREEN\]\$\[$TPUT_RESET\] "
-elif [[ $HOSTNAME = lucaswerkmeister.de ]]; then
-    # server has older bash whose __git_ps1 doesn't support two-argument form
-    # it also doesn't support GIT_PS1_SHOWCOLORHINTS :(
-    PS1="\[$TPUT_RESET$TPUT_BOLD$TPUT_GREEN\]\u@\h \[$TPUT_BLUE\]\w\[$TPUT_RESET\]\$(__git_ps1 ' (%s)') \[$TPUT_BOLD$TPUT_GREEN\]\$\[$TPUT_RESET\] "
 else
     PROMPT_COMMAND='__git_ps1 "\[$TPUT_RESET$TPUT_BOLD$TPUT_GREEN\]\u@\h \[$TPUT_BLUE\]\w\[$TPUT_RESET\]" " \[$TPUT_BOLD$TPUT_GREEN\]\$\[$TPUT_RESET\] "'
 fi
