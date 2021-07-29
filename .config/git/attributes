@@ -2,7 +2,11 @@
 *.css diff=css
 *.html diff=html
 *.java diff=java
+# TODO the .js line used to be in here but I’m not sure if it works, js is not one of the listed styles in gitattributes(5)
+*.js diff=js
 *.md diff=markdown
 *.php diff=php
 *.py diff=python
 *.tex diff=tex
+npm-shrinkwrap.json merge=npm-merge-driver
+package-lock.json merge=npm-merge-driver
