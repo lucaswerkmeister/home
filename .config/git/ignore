@@ -1,2 +1,18 @@
+# editor backup files
 *~
 \#*
+
+# editor auxiliary files
+TAGS
+
+# Emacs config files
+.dir-locals.el
+
+# Eclipse config files
+/.buildpath
+/.project
+/.settings/
+
+# IntelliJ config files
+/.idea
+/*.iml
