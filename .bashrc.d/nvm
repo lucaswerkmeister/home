@@ -1,0 +1,19 @@
+#!/bin/bash
+
+if [[ -d $HOME/.config/nvm ]]; then
+
+    export NVM_DIR=$HOME/.config/nvm
+    [[ -s $NVM_DIR/nvm.sh ]] && source "$NVM_DIR/nvm.sh"  # This loads nvm
+    [[ -s $NVM_DIR/bash_completion ]] && source "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+    # automatically run `nvm use` when changing to a directory with an .nvmrc
+    function _nvmcd {
+        cd "$@"
+        if [[ -f .nvmrc ]]; then
+            nvm use > /dev/null
+        fi
+    }
+    alias cd=_nvmcd
+    _nvmcd . # in case the start directory has an .nvmrc
+
+fi
