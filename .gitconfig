@@ -23,6 +23,7 @@
 	editor = vim
 	autocrlf = input
 	pager = exec less --RAW-CONTROL-CHARS --chop-long-lines --tabs=1,5
+	abbrev = 10
 [status]
 	branch = true
 	short = true
