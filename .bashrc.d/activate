@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# Activate the given Python virtual environment.
+#
+#     activate # source venv/bin/activate
+#     activate .env # source .env/bin/activate
+#
+# To undo, run `deactivate` as usual.
+
+function activate {
+    source "${1:-venv}/bin/activate"
+}
