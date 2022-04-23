@@ -20,7 +20,7 @@ function lterm {
     local name=$1 location=$(term-location "$@")
 
     if tmux has-session -t "=$name" &>/dev/null; then
-        if activate-window "^$name:"; then
+        if activate-window "$name:"; then
             # nothing more to do, except…
             if [[ $- == *i* ]] && ((${BASH_LINENO[-1]} == 1)); then
                 # first command of an interactive shell:

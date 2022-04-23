@@ -1,39 +1,68 @@
 #!/bin/bash
 
-# Attempt to activate a window with a title that matches the given pattern.
+# Attempt to activate a window whose title has the given prefix.
 #
-# The pattern is a POSIX Extended Regular Expression when using xdotool
-# and an ECMAScript regular expression pattern when using GNOME Shell,
-# though as far as I know the latter is a strict superset of the former.
-# In both cases, the pattern is case-insensitive.
+# This function works best when using Gnome Shell, with the extension
+# https://extensions.gnome.org/extension/5021/activate-window-by-title/
+# (Activate Window By Title) installed.
+#
+# If the extension is not available, we try two fallbacks:
+# * using org.gnome.Shell.Eval (requires unsafe mode since Gnome 41)
+# * using xdotool (only works in X sessions; prefix is case-insensitive)
+# Please note that neither fallback has been tested very well.
 
 function activate-window {
-    activate-window-gnome-shell "$1" || activate-window-xdotool "$1"
+    activate-window-gnome-shell-extension "$1" || activate-window-gnome-shell "$1" || activate-window-xdotool "$1"
+}
+
+function activate-window-gnome-shell-extension {
+    busctl --user call \
+           org.gnome.Shell \
+           /de/lucaswerkmeister/ActivateWindowByTitle \
+           de.lucaswerkmeister.ActivateWindowByTitle \
+           activateByPrefix \
+           s "$1" \
+        | (
+        IFS=' ' read -r b found
+        [[ $b == b ]] || { printf >&2 'dbus call de.lucaswerkmeister.ActivateWindowByTitle: expected return type b but was %q\n' "$b"; exit 1; }
+        [[ $found == true ]] || exit 1
+    )
 }
 
 function activate-window-gnome-shell {
+    local string="${1//'\'/'\\'}"
+    local string='"'"${string//'"'/'\"'}"'"'
     busctl --user call org.gnome.Shell /org/gnome/Shell org.gnome.Shell Eval s '
         (function() {
-            let found = false;
             for ( const actor of global.get_window_actors() ) {
                 const window = actor.get_meta_window(),
                       title = window.get_title();
-                if ( /'"${1//'/'/'\/'}"'/i.test( title ) ) {
+                if ( title.startsWith( '"$string"' ) ) {
                     window.activate( global.get_current_time() );
-                    found = true;
-                    break;
+                    return true;
                 }
             }
-            return found;
+            return false;
         })();
     ' | (
-        IFS=' ' read -r bs true result
+        IFS=' ' read -r bs success result
         [[ $bs == bs ]] || { printf >&2 'dbus call org.gnome.Shell.Eval: expected return type bs but was %q\n' "$bs"; exit 1; }
-        [[ $true == true ]] || { printf >&2 'dbus call org.gnome.Shell.Eval: expected success=true but was %q\nResult: %s\n' "$true" "$result"; exit 1; }
+        [[ $success == true ]] || { printf >&2 'dbus call org.gnome.Shell.Eval: expected success=true but was %q\nResult: %s\n' "$success" "$result"; exit 1; }
         [[ $result == '"true"' ]] || exit 1
     )
 }
 
 function activate-window-xdotool {
-    xdotool search --name "$1" windowactivate &>/dev/null
+    local pattern="${1//'\'/'\\'}"
+    pattern="${pattern//'.'/'\.'}"
+    pattern="${pattern//'['/'\['}"
+    pattern="${pattern//'('/'\('}"
+    pattern="${pattern//'^'/'\^'}"
+    pattern="${pattern//'$'/'\$'}"
+    pattern="${pattern//'*'/'\*'}"
+    pattern="${pattern//'+'/'\+'}"
+    pattern="${pattern//'?'/'\?'}"
+    pattern="${pattern//'{'/'\{'}"
+    pattern="${pattern//'|'/'\|'}"
+    xdotool search --name "^$pattern" windowactivate &>/dev/null
 }
