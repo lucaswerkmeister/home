@@ -62,14 +62,10 @@
 # - gh_:   github, private
 # - ghlw:  github/lucaswerkmeister, public
 # - ghlw_: github/lucaswerkmeister, private
-# - ghc:   github/ceylon, public
-# - ghc_:  github/ceylon, private
-# - ghe:   github/eclipse, public
-# - ghe_:  github/eclipse, private
 # - gist:  gist, public
 # - gist_: gist, private
-# - wmg:   wikimedia gerrit, public
-# - wmge:  wikimedia gerrit mediawiki/extensions, public
+# - wmg:   wikimedia gerrit
+# - wmge:  wikimedia gerrit mediawiki/extensions
 # 
 # public: pull over HTTPS, push over SSH;
 # private: pull and push over SSH
@@ -80,10 +76,6 @@
 	insteadOf = "gh:"
 [url "https://github.com/lucaswerkmeister/"]
 	insteadOf = "ghlw:"
-[url "https://github.com/ceylon/"]
-	insteadOf = "ghc:"
-[url "https://github.com/eclipse/"]
-	insteadOf = "ghe:"
 [url "https://gist.github.com/"]
 	insteadOf = "gist:"
 [url "https://gerrit.wikimedia.org/r/"]
@@ -100,16 +92,6 @@
 	pushInsteadOf = "ghlw:"
 	pushInsteadOf = "https://github.com/lucaswerkmeister/"
 	pushInsteadOf = "ghlw_:"
-[url "github:ceylon/"]
-	insteadOf = "ghc_:"
-	pushInsteadOf = "ghc:"
-	pushInsteadOf = "https://github.com/ceylon/"
-	pushInsteadOf = "ghc_:"
-[url "github:eclipse/"]
-	insteadOf = "ghe_:"
-	pushInsteadOf = "ghe:"
-	pushInsteadOf = "https://github.com/eclipse/"
-	pushInsteadOf = "ghe_:"
 [url "github-gist:"]
 	insteadOf = "gist_:"
 	pushInsteadOf = "gist:"
