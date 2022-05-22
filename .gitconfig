@@ -82,6 +82,10 @@
 	insteadOf = "wmg:"
 [url "https://gerrit.wikimedia.org/r/mediawiki/extensions/"]
 	insteadOf = "wmge:"
+[url "https://gitlab.wikimedia.org/"]
+	insteadOf = "gl:"
+[url "https://gitlab.wikimedia.org/lucaswerkmeister/"]
+	insteadOf = "gllw:"
 [url "github:"]
 	insteadOf = "gh_:"
 	pushInsteadOf = "gh:"
@@ -100,6 +104,10 @@
 	pushInsteadOf = "wmg:"
 [url "gerrit:mediawiki/extensions/"]
 	pushInsteadOf = "wmge:"
+[url "gitlab:"]
+	pushInsteadOf = "gl:"
+[url "gitlab:lucaswerkmeister/"]
+	pushInsteadOf = "gllw:"
 [init]
 	defaultBranch = main
 [merge "npm-merge-driver"]
