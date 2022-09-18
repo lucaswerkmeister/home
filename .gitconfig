@@ -43,6 +43,7 @@
 	fsckObjects = true
 [log]
 	follow = true
+	abbrevCommit = true
 [diff]
 	colorMoved = dimmed-zebra
 [sendemail]
