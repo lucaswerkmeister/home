@@ -67,11 +67,14 @@
 # - gist_: gist, private
 # - wmg:   wikimedia gerrit
 # - wmge:  wikimedia gerrit mediawiki/extensions
+# - gl:    wikimedia gitlab
+# - gllw:  wikimedia gitlab/lucaswerkmeister
+# - gltr:  wikimedia gitlab/toolforge-repos
 # 
 # public: pull over HTTPS, push over SSH;
 # private: pull and push over SSH
 # 
-# (hosts `github`, `github-gist`, `gerrit` are set up in SSH config)
+# (hosts `github`, `github-gist`, `gerrit`, `gitlab` are set up in SSH config)
 
 [url "https://github.com/"]
 	insteadOf = "gh:"
@@ -87,6 +90,8 @@
 	insteadOf = "gl:"
 [url "https://gitlab.wikimedia.org/lucaswerkmeister/"]
 	insteadOf = "gllw:"
+[url "https://gitlab.wikimedia.org/toolforge-repos/"]
+	insteadOf = "gltr:"
 [url "github:"]
 	insteadOf = "gh_:"
 	pushInsteadOf = "gh:"
@@ -109,6 +114,8 @@
 	pushInsteadOf = "gl:"
 [url "gitlab:lucaswerkmeister/"]
 	pushInsteadOf = "gllw:"
+[url "gitlab:toolforge-repos/"]
+	pushInsteadOf = "gltr:"
 [init]
 	defaultBranch = main
 [merge "npm-merge-driver"]
