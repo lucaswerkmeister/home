@@ -1,0 +1,48 @@
+#!/bin/bash
+
+# Edit a file that has been GPG-encrypted to myself.
+# Decrypt the file into memory (this function is only suitable for smallish files),
+# pipe it through an Emacs reconfigured to read from stdin on startup and write to stdout on exit,
+# then encrypt it to a new file and move that to the original filename with backups enabled.
+# Within Emacs, don’t try to save (C-x C-s) the file, just exit (C-x C-c) when you’re done.
+
+# Note that this should only be considered a best effort:
+# for example, we don’t (can’t) mlock(2) the memory containing the decrypted contents
+# (i.e. tell the kernel to never swap this memory to disk),
+# even though we should.
+# Also, depending on your gpg-agent config (especially default-cache-ttl and max-cache-ttl),
+# other processes running from your user account may still be able to decrypt the file.
+
+function gpgedit {
+    local filename contents edited
+
+    if (($# != 1)); then
+        printf >&2 'Usage: gpgedit FILENAME\n'
+        return 1
+    fi
+
+    filename=$1
+    if ! contents=$(gpg --decrypt < "$filename" && printf '\r'); then
+        printf >&2 'gpgedit: decryption failed\n'
+        return 1
+    fi
+    # the temporary \r prevents the $() process substitution from trimming trailing newlines in the file
+    contents=${contents%$'\r'}
+
+    if ! edited=$(
+            printf '%s' "$contents" |
+                \emacs --insert /dev/stdin --eval '(global-set-key (kbd "C-x C-c") (lambda () (interactive) (progn (write-region nil nil "/dev/stdout") (save-buffers-kill-terminal))))' &&
+                printf '\r'
+         ); then
+        printf >&2 'gpgedit: editing failed\n'
+        return 1
+    fi
+    edited=${edited%$'\r'}
+
+    if ! printf '%s' "$edited" | gpg --encrypt --recipient F01C8147729FCF69 >| "$filename.new"; then
+        printf >&2 'gpgedit: encryption failed\n'
+        return 1
+    fi
+
+    mv -b -- "$filename.new" "$filename"
+}
