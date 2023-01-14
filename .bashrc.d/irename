@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+# Interactively rename one or more files.
+# Usage: irename FILE...
+# To skip one file, enter the empty string,
+# e.g. using Ctrl+U and/or Ctrl+K;
+# Ctrl+C cancels the current and all remaining files.
+
+function irename {
+    if [[ $# == 0 ]]; then
+        printf 'Usage: %s FILE...\n' "${FUNCNAME[0]}"
+        return 1
+    fi
+    for file; do
+        if IFS= read -rei"$file" dest && [[ -n $dest ]]; then
+            mv -- "$file" "$dest";
+        fi
+    done
+}
