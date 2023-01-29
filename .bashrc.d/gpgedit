@@ -39,6 +39,11 @@ function gpgedit {
     fi
     edited=${edited%$'\r'}
 
+    if [[ $edited == '' ]]; then
+        printf >&2 'gpgedit: edited file appears empty, not saving\n'
+        return 1
+    fi
+
     if ! printf '%s' "$edited" | gpg --encrypt --recipient F01C8147729FCF69 >| "$filename.new"; then
         printf >&2 'gpgedit: encryption failed\n'
         return 1
