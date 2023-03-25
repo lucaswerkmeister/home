@@ -6,3 +6,5 @@
 --write-sub
 --all-subs
 --embed-subs
+# don’t set file modification time based on Last-Modified header
+--no-mtime
