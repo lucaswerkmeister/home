@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+# Show the tweets in one Twitter archive.
+# Usage: tweets Downloads/twitter-….zip
+# Tweets are shown as a stream of concatenated JSON objects,
+# automatically piped into less if stdout is a tty.
+
+function tweets {
+    if (($# != 1)); then
+        printf 'Usage: %s ARCHIVE\n' "${FUNCNAME[0]}"
+        return 1
+    fi
+    if [[ -t 1 ]]; then
+        unzip -p "$1" data/tweets.js | sed '1 s/^window\.YTD\.tweets\.part0 = //' | jq '.[]' | less
+    else
+        unzip -p "$1" data/tweets.js | sed '1 s/^window\.YTD\.tweets\.part0 = //' | jq '.[]'
+    fi
+}

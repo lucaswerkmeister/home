@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+# Show the toots (posts) in one Mastodon archive.
+# Usage: toots Downloads/archive-….tar.gz
+# Posts are shown as a stream of concatenated JSON objects,
+# automatically piped into less if stdout is a tty.
+
+function toots {
+    if (($# != 1)); then
+        printf 'Usage: %s ARCHIVE\n' "${FUNCNAME[0]}"
+        return 1
+    fi
+    if [[ -t 1 ]]; then
+        tar -xOf "$1" outbox.json | jq '.orderedItems | .[]' | less
+    else
+        tar -xOf "$1" outbox.json | jq '.orderedItems | .[]'
+    fi
+}
