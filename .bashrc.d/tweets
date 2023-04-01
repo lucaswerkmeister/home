@@ -16,3 +16,5 @@ function tweets {
         unzip -p "$1" data/tweets.js | sed '1 s/^window\.YTD\.tweets\.part0 = //' | jq '.[]'
     fi
 }
+
+_xspecs[tweets]='!*.zip'

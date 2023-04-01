@@ -16,3 +16,5 @@ function toots {
         tar -xOf "$1" outbox.json | jq '.orderedItems | .[]'
     fi
 }
+
+_xspecs[toots]='!*.tar.gz'
