@@ -4,7 +4,8 @@
 --add-metadata
 # download subtitles
 --write-sub
---all-subs
 --embed-subs
+# all except YouTube live chat, don’t care for that
+--sub-langs all,-live_chat
 # don’t set file modification time based on Last-Modified header
 --no-mtime
