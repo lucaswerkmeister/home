@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# usage: wikimedia-debug-diff 'https://commons.wikimedia.org/w/api.php?action=query&meta=siteinfo&siprop=restrictions&format=json&formatversion=2'
+function wikimedia-debug-diff {
+    diff -u <(curl -s "$1" | jq .) <(curl -s -H 'X-Wikimedia-Debug: backend=k8s-mwdebug' "$1" | jq .)
+}
