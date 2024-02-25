@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# if a glob fails to match anything, report an error
+# (instead of running the command with the literal glob string)
+shopt -s failglob
