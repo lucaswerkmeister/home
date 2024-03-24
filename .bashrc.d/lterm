@@ -40,6 +40,9 @@ function _lterm {
     if [[ $COMP_CWORD == 1 ]]; then
         COMPREPLY=()
         for dir in "${XDG_CONFIG_HOME:-$HOME/.config}" ${XDG_CONFIG_DIRS:-/etc/xdg}; do
+            if [[ ! -d "$dir"/lterm ]]; then
+                continue
+            fi
             for link in "$dir"/lterm/*; do
                 if [[ -L $link ]]; then
                     name=${link##*/}
