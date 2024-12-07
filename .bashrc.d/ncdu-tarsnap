@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+# Show disk usage of tarsnap backups.
+#
+# You can delete files in ncdu,
+# but keep in mind that ncdu is operating on the local file system.
+# Don’t delete any files that you want to keep there,
+# and don’t assume that they will be removed from any existing backups.
+#
+# Assumptions that apply to my setup but may or may not apply to others’:
+# * the most relevant folder being backed up is ~
+#   (I actually back up /home and /etc but everything outside of ~ is negligible –
+#   ncdu doesn’t support inspecting multiple directories at once)
+# * some files below ~ are not $USER-readable, so running ncdu with sudo is useful
+# * the backup is being made as root
+#   (otherwise the non-$USER-readable files should not be counted after all)
+# * only /etc/tarsnap/tarsnap.conf is used
+function ncdu-tarsnap {
+    # bash -c is needed because sudo … <() doesn’t work properly (see -C in sudo(8))
+
+    # --apparent-size probably makes more sense for a backup than --disk-usage
+
+    # note that this will also show (with empty size)
+    # files that are excluded;
+    # unfortunately, ncdu’s --hide-hidden hides both hidden (.*) and excluded files,
+    # and there seems to be no option for hiding excluded but showing hidden files :(
+    sudo bash -c "ncdu \"$HOME\" --apparent-size --exclude-from <(sed -n '/^exclude\s\+/ s///p' /etc/tarsnap/tarsnap.conf)"
+}
