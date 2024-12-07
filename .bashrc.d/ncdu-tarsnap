@@ -15,6 +15,7 @@
 # * the backup is being made as root
 #   (otherwise the non-$USER-readable files should not be counted after all)
 # * only /etc/tarsnap/tarsnap.conf is used
+#   (no ~/.tarsnaprc and also no --exclude on the command line)
 function ncdu-tarsnap {
     # bash -c is needed because sudo … <() doesn’t work properly (see -C in sudo(8))
 
