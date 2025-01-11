@@ -10,11 +10,15 @@ function toots {
         printf 'Usage: %s ARCHIVE\n' "${FUNCNAME[0]}"
         return 1
     fi
-    if [[ -t 1 ]]; then
-        tar -xOf "$1" outbox.json | jq '.orderedItems | .[]' | less
+    if [[ $1 = *.tar.gz ]]; then
+        tar -xOf "$1" outbox.json
     else
-        tar -xOf "$1" outbox.json | jq '.orderedItems | .[]'
+        unzip -p "$1" outbox.json
+    fi | if [[ -t 1 ]]; then
+        jq '.orderedItems | .[]' | less
+    else
+        jq '.orderedItems | .[]'
     fi
 }
 
-_xspecs[toots]='!*.tar.gz'
+_xspecs[toots]='!*.@(tar.gz|zip)'
