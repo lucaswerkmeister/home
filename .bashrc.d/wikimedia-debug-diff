@@ -2,14 +2,22 @@
 # usage: wikimedia-debug-diff 'https://commons.wikimedia.org/w/api.php?action=query&meta=siteinfo&siprop=restrictions&format=json&formatversion=2'
 function wikimedia-debug-diff {
     if [[ $# != 1 || $1 == '-h' || $1 == '--help' ]]; then
-        local usage="Usage: wikimedia-debug-diff 'https://commons.wikimedia.org/w/api.php?action=query&meta=siteinfo&siprop=usergroups|restrictions&format=json&formatversion=2' # or similar URL"
+        local usage=(
+            'Usage:'
+            "wikimedia-debug-diff 'https://commons.wikimedia.org/w/api.php?action=query&meta=siteinfo&siprop=usergroups|restrictions&format=json&formatversion=2' # or similar URL"
+            'wikimedia-debug-diff commons.wikimedia.org # plain domain defaults to api.php query shown above'
+        )
         if [[ $# != 1 ]]; then
-            printf >&2 '%s\n' "$usage"
+            printf >&2 '%s\n' "${usage[@]}"
             return 1
         else
-            printf '%s\n' "$usage"
+            printf '%s\n' "${usage[@]}"
             return 0
         fi
     fi
-    diff -u <(curl -s "$1" | jq .) <(curl -s -H 'X-Wikimedia-Debug: backend=k8s-mwdebug' "$1" | jq .)
+    url=$1
+    if ! [[ $url = */* ]]; then
+        url="https://$url/w/api.php?action=query&meta=siteinfo&siprop=usergroups|restrictions&format=json&formatversion=2"
+    fi
+    diff -u <(curl -s "$url" | jq .) <(curl -s -H 'X-Wikimedia-Debug: backend=k8s-mwdebug' "$url" | jq .)
 }
