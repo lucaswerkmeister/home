@@ -69,6 +69,7 @@
 # - wmge:  wikimedia gerrit mediawiki/extensions
 # - gl:    wikimedia gitlab
 # - gllw:  wikimedia gitlab/lucaswerkmeister
+# - gllww: wikimedia gitlab/lucaswerkmeister-wmde
 # - gltr:  wikimedia gitlab/toolforge-repos
 # 
 # public: pull over HTTPS, push over SSH;
@@ -90,6 +91,8 @@
 	insteadOf = "gl:"
 [url "https://gitlab.wikimedia.org/lucaswerkmeister/"]
 	insteadOf = "gllw:"
+[url "https://gitlab.wikimedia.org/lucaswerkmeister-wmde/"]
+	insteadOf = "gllww:"
 [url "https://gitlab.wikimedia.org/toolforge-repos/"]
 	insteadOf = "gltr:"
 [url "github:"]
@@ -114,6 +117,8 @@
 	pushInsteadOf = "gl:"
 [url "gitlab:lucaswerkmeister/"]
 	pushInsteadOf = "gllw:"
+[url "gitlab:lucaswerkmeister-wmde/"]
+	pushInsteadOf = "gllww:"
 [url "gitlab:toolforge-repos/"]
 	pushInsteadOf = "gltr:"
 [init]
