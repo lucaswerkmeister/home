@@ -19,5 +19,10 @@ function wikimedia-debug-diff {
     if ! [[ $url = */* ]]; then
         url="https://$url/w/api.php?action=query&meta=siteinfo&siprop=usergroups|restrictions|namespaces|namespacealiases&format=json&formatversion=2"
     fi
-    diff -u <(curl -s "$url" | jq .) <(curl -s -H 'X-Wikimedia-Debug: backend=k8s-mwdebug' "$url" | jq .)
+    if [[ $url = *format=json* ]] || [[ $url = *.json ]] || [[ $url = *.json\?* ]] || [[ $url = *.json\&* ]]; then
+        formatter=(jq .)
+    else
+        formatter=(cat)
+    fi
+    diff -u <(curl -s "$url" | "${formatter[@]}") <(curl -s -H 'X-Wikimedia-Debug: backend=k8s-mwdebug' "$url" | "${formatter[@]}")
 }
