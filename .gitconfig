@@ -30,11 +30,13 @@
 [fetch]
 	prune = true
 [merge]
-	conflictstyle = diff3
+	conflictstyle = zdiff3
 [rerere]
 	enabled = true
+	autoUpdate = true
 [rebase]
-	autosquash = true
+	autoSquash = true
+	autoStash = true
 [help]
 	autocorrect = 10
 [pull]
@@ -46,6 +48,8 @@
 	abbrevCommit = true
 [diff]
 	colorMoved = dimmed-zebra
+	algorithm = histogram
+	mnemonicPrefix = true
 [sendemail]
 	smtpEncryption = tls
 	smtpServer = lucaswerkmeister.de
@@ -128,3 +132,7 @@
 	driver = npx npm-merge-driver merge %A %O %B %P
 [advice]
 	skippedCherryPicks = false
+[branch]
+	sort = -committerdate
+[tag]
+	sort = version:refname
