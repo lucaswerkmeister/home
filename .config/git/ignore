@@ -16,3 +16,6 @@ TAGS
 # IntelliJ config files
 /.idea
 /*.iml
+
+# security patches
+*SECURITY*.patch
