@@ -75,6 +75,7 @@
 # - gllw:  wikimedia gitlab/lucaswerkmeister
 # - gllww: wikimedia gitlab/lucaswerkmeister-wmde
 # - gltr:  wikimedia gitlab/toolforge-repos
+# - glm3:  wikimedia gitlab/repos/m3api
 # 
 # public: pull over HTTPS, push over SSH;
 # private: pull and push over SSH
@@ -99,6 +100,8 @@
 	insteadOf = "gllww:"
 [url "https://gitlab.wikimedia.org/toolforge-repos/"]
 	insteadOf = "gltr:"
+[url "https://gitlab.wikimedia.org/repos/m3api/"]
+	insteadOf = "glm3:"
 [url "github:"]
 	insteadOf = "gh_:"
 	pushInsteadOf = "gh:"
@@ -125,6 +128,8 @@
 	pushInsteadOf = "gllww:"
 [url "gitlab:toolforge-repos/"]
 	pushInsteadOf = "gltr:"
+[url "gitlab:repos/m3api/"]
+	pushInsteadOf = "glm3:"
 [init]
 	defaultBranch = main
 [merge "npm-merge-driver"]
