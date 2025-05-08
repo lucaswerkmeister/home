@@ -10,10 +10,12 @@
  '(package-archives
    '(("gnu" . "http://elpa.gnu.org/packages/")
      ("melpa" . "https://melpa.org/packages/")))
- '(package-selected-packages (quote (graphviz-dot-mode systemd haskell-mode tss)))
+ '(package-selected-packages
+   '(graphviz-dot-mode haskell-mode jq-mode markdown-mode markdown-mode+
+                       php-mode realgud rust-mode sparql-mode systemd
+                       toml-mode vala-mode vue3-mode yaml-mode))
  '(safe-local-variable-values
-   '((nxml-child-indent . 2)
-     (make-backup-files)
+   '((sgml-basic-offset . 4) (nxml-child-indent . 2) (make-backup-files)
      (eval c-set-offset 'arglist-cont-nonempty
            '(c-lineup-gcc-asm-reg c-lineup-arglist))
      (eval c-set-offset 'arglist-close 0)
@@ -30,6 +32,8 @@
 
 (package-initialize)
 
+(add-to-list 'auto-mode-alist '("\\.mjs\\'" . js-mode))
+
 (autoload 'markdown-mode "markdown-mode.el" "Markdown mode" t)
 (setq auto-mode-alist (cons '("\\.md\\'" . markdown-mode) auto-mode-alist))
 (setq auto-mode-alist (cons '("\\.markdown\\'" . markdown-mode) auto-mode-alist))
@@ -40,6 +44,15 @@
 (autoload 'LilyPond-mode "lilypond-mode.el" "LilyPond mode" t)
 (add-to-list 'load-path "/usr/share/emacs/site-lisp") ; the lilypond package installs elisp files outside the version-specific directory
 (add-to-list 'auto-mode-alist '("\\.ly\\'" . LilyPond-mode))
+
+(autoload 'rust-mode "rust-mode" nil t)
+(add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-mode))
+
+(autoload 'lua-mode "lua-mode" "Lua editing mode." t)
+(add-to-list 'auto-mode-alist '("\\.lua\\'" . lua-mode))
+
+(autoload 'vue3-mode "vue3-mode" "Syntax highlighting for modern Vue.js 3." t)
+(add-to-list 'auto-mode-alist '("\\.vue\\'" . vue3-mode))
 
 (setq-default indent-tabs-mode nil)
 (setq column-number-mode t)
