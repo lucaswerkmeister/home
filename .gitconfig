@@ -74,6 +74,8 @@
 # - gllww: wikimedia gitlab/lucaswerkmeister-wmde
 # - gltr:  wikimedia gitlab/toolforge-repos
 # - glm3:  wikimedia gitlab/repos/m3api
+# - salsa: Debian Salsa (GitLab)
+# - salsa-lw: Debian Salsa/lucaswerkmeister-guest
 # 
 # public: pull over HTTPS, push over SSH;
 # private: pull and push over SSH
@@ -100,6 +102,10 @@
 	insteadOf = "gltr:"
 [url "https://gitlab.wikimedia.org/repos/m3api/"]
 	insteadOf = "glm3:"
+[url "https://salsa.debian.org/"]
+	insteadOf = "salsa:"
+[url "https://salsa.debian.org/lucaswerkmeister-guest/"]
+	insteadOf = "salsa-lw:"
 [url "github:"]
 	insteadOf = "gh_:"
 	pushInsteadOf = "gh:"
@@ -128,6 +134,10 @@
 	pushInsteadOf = "gltr:"
 [url "gitlab:repos/m3api/"]
 	pushInsteadOf = "glm3:"
+[url "debian-salsa-guest:"]
+	pushInsteadOf = "salsa:"
+[url "debian-salsa-guest:lucaswerkmeister-guest/"]
+	pushInsteadOf = "salsa-lw:"
 [init]
 	defaultBranch = main
 [merge "npm-merge-driver"]
