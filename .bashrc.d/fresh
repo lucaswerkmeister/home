@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+alias fnpm='fresh-node -- npm'
+alias fnnpm='fresh-node -net -- npm'
+alias fnpx='fresh-node -- npx'
+alias fnnpx='fresh-node -net -- npx'
+alias fnode='fresh-node -- node'
+alias fnnode='fresh-node -net -- node'
