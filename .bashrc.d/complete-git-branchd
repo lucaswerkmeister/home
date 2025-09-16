@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+function _git_branchd {
+    __git_complete_refs
+}

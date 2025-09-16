@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+
+# Delete a branch if it has been fully merged or rebased into the current branch.
+#
+# To enable Bash completion for this command, define a function _git_has_conflict
+# and make it call e.g. __git_complete_refs:
+#
+#     function _git_has_conflict {
+#         __git_complete_refs
+#     }
+
+exit=0
+for branch; do
+    applied=0
+    unapplied=0
+    while IFS=' ' read -r plusminus hash _; do
+        if [[ $plusminus = '+' ]]; then
+            let unapplied++
+        elif [[ $plusminus = '-' ]]; then
+            let applied++
+        else
+            printf >&2 '%s: unexpected "git cherry" output: %s %s %s\n' "$0" "$plusminus" "$hash" "$_"
+            exit 1
+        fi
+    done < <(git cherry @ "$branch")
+    if ((applied+unapplied == 0)); then
+        printf 'Deleting fully merged branch %s...\n' "$branch"
+        git branch -d "$branch"
+    elif ((unapplied > 0)); then
+        printf 'Not deleting branch %s: %d commit(s) not yet applied (and %d commit(s) already applied)\n' "$branch" "$unapplied" "$applied"
+        exit=1
+    else
+        printf 'Deleting fully rebased branch %s...\n' "$branch"
+        git branch -D "$branch"
+    fi
+done
+exit "$exit"
