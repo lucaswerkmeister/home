@@ -14,6 +14,7 @@ Some of the functions may be useful to you as well.
 ### `lterm`
 
 A function to (re)open a terminal window with a tmux session inside it.
+See also: [How I manage my terminals](https://lucaswerkmeister.de/posts/2018/05/06/managing-terminals/).
 
 Usage: `lterm name location`, e. g. `lterm etc /etc`,
 or just `lterm name`.
