@@ -12,14 +12,21 @@ function iotop {
         -p ProtectHome=yes
         # the dynamic user shouldn’t have permissions to mess with these anyways,
         # but why not sandbox them
-        -p ProtectKernelTunables=yes
-        -p ProtectKernelModules=yes
+        -p ProtectClock=yes
         -p ProtectControlGroups=yes
+        -p ProtectHostname=yes
+        -p ProtectKernelLogs=yes
+        -p ProtectKernelModules=yes
+        -p ProtectKernelTunables=yes
+        -p RestrictRealtime=yes
         # iotop is a Python program, it shouldn’t use any foreign syscall architectures or personalities
         -p SystemCallArchitectures=native
         -p LockPersonality=yes
+        # restrict the system calls it can make
+        -p SystemCallFilter=@system-service
+        -p SystemCallFilter='~@resources'
         # block access to namespaces
-        -p RestrictNamespaces='~'
+        -p RestrictNamespaces=yes
         # unfortunately we cannot use PrivateNetwork=yes, apparently iotop needs the real network namespace
         # but at least we can block IP traffic
         -p IPAddressDeny=any
@@ -28,6 +35,7 @@ function iotop {
     )
     local privileges=(
         -p AmbientCapabilities=CAP_NET_ADMIN
+        -p CapabilityBoundingSet=CAP_NET_ADMIN
     )
     sudo systemd-run -qt \
          "${sandbox[@]}" \
