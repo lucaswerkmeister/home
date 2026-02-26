@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+# see also ./ffmpeg for the ffprobe *alias* which resolves before this function
+
+# allow `ffprobe *.mp4` by repeatedly calling ffprobe, once per file argument
+# (while repeating the non-file arguments for every invocation)
+function ffprobe {
+    local file_args=() non_file_args=()
+    for arg; do
+        if [[ -f $arg ]]; then
+            file_args+=("$arg")
+        else
+            non_file_args+=("$arg")
+        fi
+    done
+    if ((${#file_args[@]} > 1)); then
+        for file_arg in "${file_args[@]}"; do
+            command ffprobe "${non_file_args[@]}" "$file_arg" || break
+        done
+    else
+        command ffprobe "$@"
+    fi
+}
