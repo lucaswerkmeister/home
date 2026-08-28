@@ -14,6 +14,7 @@ if [[ ! $tool || ! $database || $rest ]]; then
 fi
 
 export SSH_ASKPASS=/bin/false
+export SSH_ASKPASS_REQUIRE=never
 
 if ! ssh toolforge true; then
     printf '%s\n' 'cannot connect to Toolforge, skipping'
@@ -22,10 +23,18 @@ fi
 
 mkdir -p "${XDG_DATA_HOME:-$HOME/.local/share}/toolsdb-backup/$tool/$database/"
 
-ssh toolforge \
-    become "$tool" \
-    mysqldump --defaults-file=~/replica.my.cnf --host=tools.db.svc.wikimedia.cloud --single-transaction "$database" \
-    \| zstd \
-    | zstd -d \
+# use different port locally so we don’t conflict with local MariaDB
+ssh -fNT -L 127.0.0.1:33060:tools.db.svc.wikimedia.cloud:3306 toolforge
+# -f = go to background; this potentially leaks the process,
+# but I found no way to get the port forwarding working under job control
+# (systemd.kill(5) KillMode=control-group will clean it up for us,
+# and also it probably just delegated to the ControlMaster anyway)
+
+mariadb-dump \
+    --defaults-file=<(ssh toolforge become "$tool" cat replica.my.cnf) \
+    --host=127.0.0.1 \
+    --port=33060 \
+    --single-transaction \
+    "$database" \
     | xz \
     > "${XDG_DATA_HOME:-$HOME/.local/share}/toolsdb-backup/$tool/$database/$(date -I).sql.xz"
